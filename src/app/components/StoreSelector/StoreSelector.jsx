@@ -1,6 +1,13 @@
 import React from "react";
 import styles from "./StoreSelector.module.css";
-import { MapPin, ChevronRight, TrendingUp, TrendingDown } from "lucide-react";
+import {
+  MapPin,
+  ChevronRight,
+  TrendingUp,
+  TrendingDown,
+  CirclePlus,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const StoreSelector = () => {
   return (
@@ -48,6 +55,15 @@ const StoreSelector = () => {
               <ChevronRight className={styles.chevronRight} size={16} />
             </div>
           </div>
+        </div>
+        <div className={styles.reportStockButtonContainer}>
+          <Button
+            variant="outline"
+            className={`${styles.reportStockButton} w-full p-6 cursor-pointer shadow-none`}
+            size="sm"
+          >
+            <CirclePlus size={16} /> Report Stock
+          </Button>
         </div>
       </div>
     </div>
