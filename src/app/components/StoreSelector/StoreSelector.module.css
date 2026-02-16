@@ -1,0 +1,98 @@
+.mainContainer {
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.contentContainer {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 64rem;
+}
+
+.sectionHeader {
+  text-transform: uppercase;
+  color: gray;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.storeDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.storeCards {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 16px;
+}
+
+.storeCard {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0.5px solid gainsboro;
+  padding: 16px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.storeCard:hover {
+  border-color: #dd2928;
+  box-shadow: 0 4px 10px rgba(221, 41, 40, 0.15);
+  transform: translateY(-2px);
+}
+
+.storeEmblemContainer {
+  width: 48px;
+  height: 48px;
+  background-color: #fdeaeb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.storeEmblem {
+  color: #dd2928;
+}
+
+.leftSide {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.storeTitle {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.storeAddress,
+.productsTracked {
+  font-size: 12px;
+  color: gray;
+}
+
+.productsTracked {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chevronRight {
+  color: gray;
+}
+
+.storeCard:hover .chevronRight {
+  color: #dd2928;
+}
+
+@media (max-width: 1024px) {
+  .mainContainer {
+    padding: 0 16px;
+  }
+}
