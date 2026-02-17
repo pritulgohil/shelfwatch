@@ -1,0 +1,57 @@
+.mainContainer {
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.contentContainer {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 64rem;
+}
+
+.sectionHeader {
+  text-transform: uppercase;
+  color: gray;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.storeCards {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 16px;
+}
+
+.reportStockButtonContainer {
+  margin-top: 1.5rem;
+}
+
+.reportStockButton {
+  background-color: #dd2928;
+  color: white;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
+
+.reportStockButton:hover {
+  background-color: #eb5050;
+}
+
+.reportStockButton:active {
+  background-color: #eb5050;
+  transform: scale(0.95);
+  box-shadow: none;
+}
+
+@media (max-width: 1024px) {
+  .mainContainer {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .storeCards {
+    flex-direction: column;
+  }
+}

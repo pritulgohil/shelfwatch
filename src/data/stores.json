@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Costco North London",
+    "slug": "costco-north",
+    "address": "693 Wonderland Rd N, London, ON",
+    "city": "london",
+    "productsTracked": 142,
+    "trend": "up"
+  },
+  {
+    "id": 2,
+    "name": "Costco South London",
+    "slug": "costco-south",
+    "address": "3140 Dingman Dr, London, ON",
+    "city": "london",
+    "productsTracked": 94,
+    "trend": "down"
+  }
+]
