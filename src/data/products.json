@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Kirkland Water 40-pack",
+    "category": "Beverages",
+    "price": 19.99,
+    "store": "Costco London North",
+    "timeAgo": "5 min ago",
+    "status": "In Stock",
+    "image": "/images/placeholder.png"
+  },
+  {
+    "id": 2,
+    "name": "Organic Eggs 24-pack",
+    "category": "Dairy",
+    "price": 8.99,
+    "store": "Costco London South",
+    "timeAgo": "12 min ago",
+    "status": "Low Stock",
+    "image": "/images/placeholder.png"
+  },
+  {
+    "id": 3,
+    "name": "Kirkland Olive Oil 2L",
+    "category": "Pantry",
+    "price": 24.49,
+    "store": "Costco London North",
+    "timeAgo": "20 min ago",
+    "status": "Out of Stock",
+    "image": "/images/placeholder.png"
+  },
+  {
+    "id": 4,
+    "name": "Rotisserie Chicken",
+    "category": "Prepared Foods",
+    "price": 7.99,
+    "store": "Costco London East",
+    "timeAgo": "2 min ago",
+    "status": "In Stock",
+    "image": "/images/placeholder.png"
+  },
+  {
+    "id": 5,
+    "name": "Kirkland Protein Bars (20-pack)",
+    "category": "Snacks",
+    "price": 21.99,
+    "store": "Costco London West",
+    "timeAgo": "35 min ago",
+    "status": "Low Stock",
+    "image": "/images/placeholder.png"
+  },
+  {
+    "id": 6,
+    "name": "Frozen Mixed Berries 2kg",
+    "category": "Frozen",
+    "price": 13.49,
+    "store": "Costco London South",
+    "timeAgo": "1 hour ago",
+    "status": "In Stock",
+    "image": "/images/placeholder.png"
+  }
+]
