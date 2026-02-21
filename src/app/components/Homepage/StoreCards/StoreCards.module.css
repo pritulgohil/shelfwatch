@@ -22,6 +22,10 @@
   transform: translateY(-2px);
 }
 
+.storeCard:hover .storeTitle {
+  color: #dd2928;
+}
+
 .storeEmblemContainer {
   width: 48px;
   height: 48px;

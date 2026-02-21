@@ -1,0 +1,63 @@
+[
+  { "id": 0, "name": "All", "slug": "all" },
+  {
+    "id": 1,
+    "name": "Beverages",
+    "slug": "beverages",
+    "emoji": "🥤"
+  },
+  {
+    "id": 2,
+    "name": "Dairy",
+    "slug": "dairy",
+    "emoji": "🥛"
+  },
+  {
+    "id": 3,
+    "name": "Bakery",
+    "slug": "bakery",
+    "emoji": "🍞"
+  },
+  {
+    "id": 4,
+    "name": "Frozen",
+    "slug": "frozen",
+    "emoji": "🧊"
+  },
+  {
+    "id": 5,
+    "name": "Snacks",
+    "slug": "snacks",
+    "emoji": "🍿"
+  },
+  {
+    "id": 6,
+    "name": "Produce",
+    "slug": "produce",
+    "emoji": "🥦"
+  },
+  {
+    "id": 7,
+    "name": "Meat & Seafood",
+    "slug": "meat-seafood",
+    "emoji": "🥩"
+  },
+  {
+    "id": 8,
+    "name": "Pantry",
+    "slug": "pantry",
+    "emoji": "🥫"
+  },
+  {
+    "id": 9,
+    "name": "Household",
+    "slug": "household",
+    "emoji": "🧻"
+  },
+  {
+    "id": 10,
+    "name": "Electronics",
+    "slug": "electronics",
+    "emoji": "📺"
+  }
+]

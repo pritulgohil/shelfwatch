@@ -1,3 +1,9 @@
+import Footer from "@/app/components/Homepage/Footer/Footer";
+import CategoryPills from "@/app/components/Storepage/CategoryPills/CategoryPills";
+import ProductRender from "@/app/components/Storepage/ProductRender/ProductRender";
+import SearchBar from "@/app/components/Storepage/SearchBar/SearchBar";
+import StockPills from "@/app/components/Storepage/StockPills/StockPills";
+import StoreHeader from "@/app/components/Storepage/StoreHeader/StoreHeader";
 import stores from "@/data/stores.json";
 
 export function generateStaticParams() {
@@ -20,10 +26,13 @@ export default async function StorePage({ params }) {
   }
 
   return (
-    <div>
-      <h1>{store.name}</h1>
-      <p>{store.address}</p>
-      <p>{store.productsTracked} Products Tracked</p>
-    </div>
+    <>
+      <StoreHeader store={store} />
+      <SearchBar />
+      <CategoryPills />
+      <StockPills />
+      <ProductRender city={city} slug={slug} storeId={store.id} />
+      <Footer />
+    </>
   );
 }

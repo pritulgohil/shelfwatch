@@ -1,0 +1,56 @@
+.mainContainer {
+  width: 100%;
+}
+
+.contentContainer {
+  width: 100%;
+  max-width: 64rem;
+  margin: 1.5rem auto;
+  display: flex;
+}
+
+.stockPillsContainer {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.stockPill {
+  padding: 6px 16px;
+  border-radius: 24px;
+  border: 1px solid gainsboro;
+  color: gray;
+  cursor: pointer;
+}
+
+.stockPill:hover {
+  color: black;
+  transition: transform 0.2s ease;
+}
+
+.stockPill:active {
+  transform: scale(0.9);
+}
+
+.active {
+  background-color: black;
+  color: white;
+  border-color: black;
+}
+
+.active:hover {
+  color: white;
+}
+
+@media (max-width: 1024px) {
+  .contentContainer {
+    width: 100%;
+    padding: 0 16px;
+  }
+}

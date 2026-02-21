@@ -19,7 +19,17 @@ const ProductCards = ({ product }) => {
           />
         </div>
         <div className={styles.productDetails}>
-          <div className={styles.productHeader}>{product.name}</div>
+          <div className={styles.productMainDetails}>
+            <div className={styles.productHeader}>{product.name}</div>
+            <div
+              className={`${styles.stockPill} ${product.status === "In Stock" ? styles.inStock : product.status === "Low Stock" ? styles.lowStock : styles.outOfStock}`}
+            >
+              {product.status}
+            </div>
+          </div>
+          <div className={styles.brandData}>
+            {product.brand} • {product.description}
+          </div>
           <div className={styles.productSubDetails}>
             <div className={styles.category}>{product.category}</div>
             <div className={styles.price}>${product.price}</div>
@@ -34,13 +44,6 @@ const ProductCards = ({ product }) => {
               {product.timeAgo}
             </div>
           </div>
-        </div>
-      </div>
-      <div className={styles.rightSide}>
-        <div
-          className={`${styles.stockPill} ${product.status === "In Stock" ? styles.inStock : product.status === "Low Stock" ? styles.lowStock : styles.outOfStock}`}
-        >
-          {product.status}
         </div>
       </div>
     </div>
