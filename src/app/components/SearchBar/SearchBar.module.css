@@ -1,0 +1,167 @@
+.mainContainer {
+  width: 100%;
+}
+
+.contentContainer {
+  width: 100%;
+  max-width: 70rem;
+  margin: 1.5rem auto;
+  display: flex;
+  padding: 0 16px;
+}
+
+.searchBarContainer {
+  width: 100%;
+  max-width: 70rem;
+  margin: 0rem auto;
+  display: flex;
+  justify-content: center;
+}
+
+.searchBarInput {
+  position: relative;
+  width: 65%;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.searchBarInput input {
+  height: 44px;
+  font-size: 14px;
+  border-radius: 8px;
+  border-color: gainsboro;
+}
+
+.searchBarInput input:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 0 2px #dd2928;
+  transition: box-shadow 0.3s ease;
+}
+
+.resultsDropdown {
+  position: absolute;
+  top: 48px;
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid gainsboro;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  z-index: 50;
+  overflow: hidden;
+  margin-top: 0.2rem;
+}
+
+.resultItem {
+  padding: 12px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.resultItem:hover {
+  background: #f7f7f7;
+}
+
+.searchHeaderWrapper {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+  color: gray;
+  background-color: #f7f7f7;
+}
+
+.searchHeader {
+  padding: 0.5rem 1rem;
+}
+
+.item {
+  padding: 0.7rem 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.itemWrapper {
+  height: 265px;
+}
+
+.imageContainer {
+  width: 40px;
+  height: 40px;
+  background-color: red;
+  border-radius: 8px;
+}
+
+.image {
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+.leftSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.itemDetails {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.itemMeta {
+  display: flex;
+  font-size: 12px;
+  gap: 0.75rem;
+}
+
+.location,
+.time {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  color: gray;
+  font-weight: 100;
+}
+
+.price {
+  font-weight: 500;
+}
+
+.itemName {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.stockPill {
+  color: #20c45d;
+  background-color: #e5f7e9;
+  font-size: 12px;
+  padding: 2px 12px;
+  border-radius: 12px;
+  height: 20px;
+  width: 75px;
+  display: flex;
+  justify-content: center;
+}
+
+.rightSide {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 1024px) {
+  .searchBarContainer {
+    width: 100%;
+  }
+}

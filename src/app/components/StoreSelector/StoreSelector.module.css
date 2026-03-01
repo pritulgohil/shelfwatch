@@ -1,0 +1,31 @@
+.mainContainer {
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.contentContainer {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 70rem;
+  padding: 0 16px;
+}
+
+.sectionHeader {
+  text-transform: uppercase;
+  color: gray;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.storeCards {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .storeCards {
+    flex-direction: column;
+  }
+}

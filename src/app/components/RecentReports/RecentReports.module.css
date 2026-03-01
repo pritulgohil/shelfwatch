@@ -1,0 +1,71 @@
+.mainContainer {
+  margin-top: 2rem;
+}
+
+.sectionHeader {
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: gray;
+  font-weight: 500;
+}
+
+.accordionContainer {
+  margin-top: 1rem;
+}
+
+.accordionTrigger {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.leftSide {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.topContainer {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.stockPill {
+  color: #20c45d;
+  background-color: #e5f7e9;
+  font-size: 12px;
+  padding: 2px 12px;
+  border-radius: 12px;
+  height: 20px;
+}
+
+.midContainer {
+  font-size: 12px;
+  color: gray;
+}
+
+.userName {
+  color: black;
+}
+
+.bottomContainer {
+  font-size: 12px;
+  color: gray;
+}
+
+.photoIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 12px;
+  color: #2563eb;
+  background-color: #eff6ff;
+  padding: 2px 12px;
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .mainContainer {
+    margin-top: unset;
+  }
+}

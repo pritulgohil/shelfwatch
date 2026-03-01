@@ -1,8 +1,8 @@
-import Footer from "./components/Homepage/Footer/Footer";
-import Header from "./components/Homepage/Header/Header";
-import Hero from "./components/Homepage/Hero/Hero";
-import { RecentUpdates } from "./components/Homepage/RecentUpdates/RecentUpdates";
-import StoreSelector from "@/app/components/Homepage/StoreSelector/StoreSelector";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
+import Hero from "./components/Hero/Hero";
+import ProductRender from "@/app/components/ProductRender/ProductRender";
+import StoreSelector from "@/app/components/StoreSelector/StoreSelector";
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
       <Header />
       <Hero />
       <StoreSelector />
-      <RecentUpdates />
+      <ProductRender />
       <Footer />
     </>
   );

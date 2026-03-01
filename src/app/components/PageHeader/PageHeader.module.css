@@ -1,0 +1,29 @@
+.mainContainer {
+  width: 100%;
+  border-bottom: 1px solid gainsboro;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  padding: 1rem 0rem;
+}
+
+.contentContainer {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 70rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0 16px;
+}
+
+.storeTitle {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.storeLocation {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: gray;
+}
