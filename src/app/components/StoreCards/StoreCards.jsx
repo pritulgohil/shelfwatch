@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const StoreCards = ({ store }) => {
   return (
-    <Link className="w-full" href={`/${store.city}/${store.slug}`}>
+    <Link className="w-full" href={`/${store.city}/${store.store_slug}`}>
       <div className={styles.storeCard}>
         <div className={styles.leftSide}>
           <div className={styles.storeEmblemContainer}>
@@ -15,12 +15,12 @@ const StoreCards = ({ store }) => {
             <div className={styles.storeTitle}>{store.name}</div>
             <div className={styles.storeAddress}>{store.address}</div>
             <div className={styles.productsTracked}>
-              {store.trend === "up" ? (
+              {store.products_tracked > 50 ? (
                 <TrendingUp size={16} className="text-green-600" />
               ) : (
                 <TrendingDown size={16} className="text-red-600" />
               )}
-              {store.productsTracked} Products Tracked
+              {store.products_tracked} Products Tracked
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import Hero from "./components/Hero/Hero";
 import ProductRender from "@/app/components/ProductRender/ProductRender";
 import StoreSelector from "@/app/components/StoreSelector/StoreSelector";
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <Header />
