@@ -11,7 +11,7 @@ const ProductCards = ({ product }) => {
       <div className={styles.leftSide}>
         <div className={styles.imageContainer}>
           <Image
-            src={product.image}
+            src="/images/placeholder.png"
             alt="Store Image"
             width={50}
             height={50}
@@ -20,7 +20,9 @@ const ProductCards = ({ product }) => {
         </div>
         <div className={styles.productDetails}>
           <div className={styles.productMainDetails}>
-            <div className={styles.productHeader}>{product.name}</div>
+            <div className={styles.productHeader}>
+              {product.brand} {product.name}
+            </div>
             <div className={styles.statusWrapper}>
               <div
                 className={`${styles.stockPill} ${product.status === "In Stock" ? styles.inStock : product.status === "Low Stock" ? styles.lowStock : styles.outOfStock}`}

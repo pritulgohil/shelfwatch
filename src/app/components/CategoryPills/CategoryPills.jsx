@@ -1,20 +1,22 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import styles from "./CategoryPills.module.css";
-// import categories from "@/data/categories.json";
 
 const CategoryPills = () => {
   const [categoriesData, setCategoriesData] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState(
+    "52efbe65-925b-4d93-8c23-63d0dcc3c31a",
+  );
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await fetch("/api/categories");
-        const text = await response.text();
-        const data = JSON.parse(text);
-        setCategoriesData(data);
-        console.log("Fetched categories:", data);
+        const data = await response.json();
+        const sortedCategories = data.sort((a, b) =>
+          a.name.localeCompare(b.name),
+        );
+        setCategoriesData(sortedCategories);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }

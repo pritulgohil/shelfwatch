@@ -53,13 +53,13 @@
   font-weight: 600;
   display: flex;
   justify-content: space-between;
-  width: 60%;
+  width: 100%;
 }
 
 .statusWrapper {
   display: flex;
   justify-content: flex-end;
-  width: 40%;
+  width: 110px;
 }
 
 .stockPill {
@@ -127,6 +127,7 @@
 .outOfStock {
   color: #dd2928;
   background-color: #fdeaeb;
+  width: 100px;
 }
 
 @media (max-width: 768px) {
@@ -147,5 +148,9 @@
 
   .productMetadata {
     font-size: 10px;
+  }
+
+  .outOfStock {
+    width: 80px;
   }
 }
