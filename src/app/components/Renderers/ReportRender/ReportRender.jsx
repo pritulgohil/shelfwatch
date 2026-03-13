@@ -5,9 +5,9 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import styles from "./ReportRender.module.css";
 import products from "@/data/products.json";
-import ProductCards from "@/app/components/ProductCards/ProductCards";
+import ProductCards from "@/app/components/Product/ProductCard/ProductCard";
 
-const ProductRender = () => {
+const ReportRender = () => {
   const { city, slug } = useParams();
   return (
     <div className={styles.mainContainer}>
@@ -19,7 +19,7 @@ const ProductRender = () => {
               href={`/${city}/${slug}/${product.slug}`}
               style={{ display: "contents" }}
             >
-              <ProductCards product={product} />
+              {/* <ProductCards product={product} /> */}
             </Link>
           ))}
         </div>
@@ -28,4 +28,4 @@ const ProductRender = () => {
   );
 };
 
-export default ProductRender;
+export default ReportRender;

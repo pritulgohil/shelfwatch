@@ -11,7 +11,7 @@ const CategoryPills = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("/api/categories");
+        const response = await fetch("/api/categories/fetch-categories");
         const data = await response.json();
         const sortedCategories = data.sort((a, b) =>
           a.name.localeCompare(b.name),

@@ -1,8 +1,8 @@
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
-import Hero from "./components/Hero/Hero";
-import ReportRender from "@/app/components/ReportRender/ReportRender";
-import StoreSelector from "@/app/components/StoreSelector/StoreSelector";
+import Footer from "./components/Layout/Footer/Footer";
+import Header from "./components/Layout/Header/Header";
+import Hero from "./components/Layout/Hero/Hero";
+import ProductRender from "@/app/components/Renderers/ProductRender/ProductRender";
+import StoreSelector from "@/app/components/Renderers/StoreSelector/StoreSelector";
 
 export default async function Home() {
   return (
@@ -10,7 +10,7 @@ export default async function Home() {
       <Header />
       <Hero />
       <StoreSelector />
-      <ReportRender />
+      <ProductRender />
       <Footer />
     </>
   );

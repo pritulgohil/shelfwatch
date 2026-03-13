@@ -1,9 +1,9 @@
-import Footer from "@/app/components/Footer/Footer";
-import CategoryPills from "@/app/components/CategoryPills/CategoryPills";
-import ProductRender from "@/app/components/ProductRender/ProductRender";
-import SearchBar from "@/app/components/SearchBar/SearchBar";
-import StockPills from "@/app/components/StockPills/StockPills";
-import StoreHeader from "@/app/components/PageHeader/PageHeader";
+import Footer from "@/app/components/Layout/Footer/Footer";
+import CategoryPills from "@/app/components/Categories/CategoryPills/CategoryPills";
+import ProductRender from "@/app/components/Renderers/ProductRender/ProductRender";
+import SearchBar from "@/app/components/Common/SearchBar/SearchBar";
+import StockPills from "@/app/components/Categories/StockPills/StockPills";
+import StoreHeader from "@/app/components/Common/PageHeader/PageHeader";
 import stores from "@/data/stores.json";
 
 export function generateStaticParams() {

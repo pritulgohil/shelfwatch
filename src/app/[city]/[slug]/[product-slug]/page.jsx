@@ -1,8 +1,8 @@
-import StoreHeader from "@/app/components/PageHeader/PageHeader";
+import StoreHeader from "@/app/components/Common/PageHeader/PageHeader";
 import stores from "@/data/stores.json";
 import products from "@/data/products.json";
 import { notFound } from "next/navigation";
-import ProductDisplay from "@/app/components/ProductDisplay/ProductDisplay";
+import ProductDisplay from "@/app/components/Renderers/ProductDisplay/ProductDisplay";
 
 export default async function StorePage({ params }) {
   const { city, slug, "product-slug": productSlug } = await params;

@@ -2,8 +2,8 @@
 
 import React from "react";
 import styles from "./StoreSelector.module.css";
-import StoreCards from "@/app/components/StoreCards/StoreCards";
-import StockReportButton from "@/app/components/StockReportButton/StockReportButton";
+import StoreCards from "@/app/components/Store/StoreCards/StoreCards";
+import StockReportButton from "@/app/components/Common/StockReportButton/StockReportButton";
 import { useEffect, useState } from "react";
 
 const StoreSelector = () => {
@@ -11,7 +11,7 @@ const StoreSelector = () => {
   useEffect(() => {
     const fetchStores = async () => {
       try {
-        const response = await fetch("/api/stores");
+        const response = await fetch("/api/stores/fetch-stores");
         const data = await response.json();
         setStores(data);
         console.log("Fetched stores:", data);

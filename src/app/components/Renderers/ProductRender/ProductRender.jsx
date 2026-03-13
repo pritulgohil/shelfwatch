@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import styles from "./ProductRender.module.css";
-import ProductCards from "@/app/components/ProductCards/ProductCards";
+import ProductCards from "@/app/components/Product/ProductCard/ProductCard";
 
 const ProductRender = () => {
   const { city, slug } = useParams();
@@ -14,7 +14,7 @@ const ProductRender = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("/api/products");
+        const res = await fetch("/api/products/fetch-products");
         if (!res.ok) throw new Error("Failed to fetch products");
         const data = await res.json();
         setProducts(data);
@@ -24,7 +24,6 @@ const ProductRender = () => {
         setLoading(false);
       }
     };
-
     fetchProducts();
   }, []);
 
