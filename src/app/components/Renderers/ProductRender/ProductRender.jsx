@@ -5,17 +5,27 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import styles from "./ProductRender.module.css";
 import ProductCards from "@/app/components/Product/ProductCard/ProductCard";
+import { useAppContext } from "@/context/AppContext";
 
 const ProductRender = () => {
   const { city, slug } = useParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { selectedCategory } = useAppContext();
+  const allProductId = "52efbe65-925b-4d93-8c23-63d0dcc3c31a";
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("/api/products/fetch-products");
+        const endpoint =
+          selectedCategory === allProductId
+            ? "/api/products/fetch-products"
+            : `/api/products/fetch-products/${selectedCategory}`;
+
+        const res = await fetch(endpoint);
+
         if (!res.ok) throw new Error("Failed to fetch products");
+
         const data = await res.json();
         setProducts(data);
       } catch (error) {
@@ -24,10 +34,15 @@ const ProductRender = () => {
         setLoading(false);
       }
     };
+
     fetchProducts();
-  }, []);
+  }, [selectedCategory]);
 
   if (loading) return <div>Loading products...</div>;
+
+  if (!products || products.length === 0) {
+    return <div>No products found for this category.</div>;
+  }
 
   return (
     <div className={styles.mainContainer}>
