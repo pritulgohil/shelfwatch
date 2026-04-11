@@ -3,11 +3,14 @@ import styles from "./PriceCard.module.css";
 import { Button } from "@/components/ui/button";
 import { ThumbsUp, ThumbsDown } from "lucide-react";
 
-export const PriceCard = () => {
+export const PriceCard = ({ currentProductDisplay }) => {
+  console.log("Test", currentProductDisplay);
   return (
     <div className={styles.priceCard}>
       <div className={styles.priceHeader}>Reported Price</div>
-      <div className={styles.productPrice}>$579.99</div>
+      <div className={styles.productPrice}>
+        ${currentProductDisplay && currentProductDisplay.reports?.[0]?.price}
+      </div>
       <div className={styles.priceReport}>
         <Button
           className={`${styles.reportButton} cursor-pointer shadow-none`}

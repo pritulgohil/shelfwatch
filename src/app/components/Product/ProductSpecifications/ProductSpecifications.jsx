@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./ProductSpecifications.module.css";
 import { Separator } from "@/components/ui/separator";
 import { Tag, Info, Barcode, Store } from "lucide-react";
+import { useAppContext } from "@/context/AppContext";
 
-const ProductSpecifications = () => {
+const ProductSpecifications = ({ currentProductDisplay }) => {
+  const { store, currentStore, setStore } = useAppContext();
+  if (!currentProductDisplay) {
+    return <>Loading..</>;
+  }
+
+  useEffect(() => {
+    const fetchStoreById = async () => {
+      try {
+        const res = await fetch(`/api/stores/fetch-stores/${currentStore}`);
+        const data = await res.json();
+        setStore(data);
+      } catch (err) {
+        console.error("Error fetching store:", err);
+      }
+    };
+
+    if (currentStore && !store) {
+      fetchStoreById();
+    }
+  }, [currentStore, store]);
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.header}>Product Details</div>
@@ -15,7 +37,9 @@ const ProductSpecifications = () => {
           </div>
           <div className={styles.detailText}>
             <div className={styles.detailName}>Brand</div>
-            <div className={styles.detailValue}>Kirkland</div>
+            <div className={styles.detailValue}>
+              {currentProductDisplay.brand}
+            </div>
           </div>
         </div>
         <Separator
@@ -32,7 +56,9 @@ const ProductSpecifications = () => {
           </div>
           <div className={styles.detailText}>
             <div className={styles.detailName}>Category</div>
-            <div className={styles.detailValue}>Electronics</div>
+            <div className={styles.detailValue}>
+              {currentProductDisplay.categories.name}
+            </div>
           </div>
         </div>
         <Separator
@@ -49,7 +75,9 @@ const ProductSpecifications = () => {
           </div>
           <div className={styles.detailText}>
             <div className={styles.detailName}>Item Number</div>
-            <div className={styles.detailValue}>5240229</div>
+            <div className={styles.detailValue}>
+              {currentProductDisplay.sku}
+            </div>
           </div>
         </div>
       </div>
@@ -62,7 +90,7 @@ const ProductSpecifications = () => {
           <div className={styles.detailText}>
             <div className={styles.detailName}>Store Location</div>
             <div className={styles.detailValue}>
-              693 Wonderland Rd N, London, ON
+              {store ? store.address : "Loading..."}
             </div>
           </div>
         </div>

@@ -2,14 +2,23 @@ import React from "react";
 import styles from "./ProductCard.module.css";
 import Image from "next/image";
 import { MapPin, Clock4 } from "lucide-react";
+import { useAppContext } from "@/context/AppContext";
+import { getTimeAgo } from "@/lib/utils/timeAgo";
 
 const ProductCards = ({ product }) => {
-  const productStatus = "Out of Stock";
-  const productCategory = "Electronics";
-  console.log("Product data in ProductCard:", product);
+  const { currentStore, setCurrentProduct, store } = useAppContext();
+  const handleCurrentProduct = (product) => {
+    setCurrentProduct(product.id);
+  };
+
+  if (!product || !store) {
+    return <>Loading...</>;
+  }
+
   return (
     <div
       className={`${styles.productCard} cursor-pointer hover:shadow-md transition-shadow duration-200 ease-in-out`}
+      onClick={() => handleCurrentProduct(product)}
     >
       <div className={styles.leftSide}>
         <div className={styles.imageContainer}>
@@ -28,9 +37,11 @@ const ProductCards = ({ product }) => {
             </div>
             <div className={styles.statusWrapper}>
               <div
-                className={`${styles.stockPill} ${product.product_status.status_name === "In Stock" ? styles.inStock : product.product_status.status_name === "Low Stock" ? styles.lowStock : styles.outOfStock}`}
+                className={`${styles.stockPill} ${product.reports?.[0]?.product_status?.status_name === "In Stock" ? styles.inStock : product.reports?.[0]?.product_status?.status_name === "Low Stock" ? styles.lowStock : product.reports?.[0]?.product_status?.status_name === "Out of Stock" ? styles.outOfStock : styles.noReports}`}
               >
-                {product.product_status.status_name}
+                {product.reports?.[0]?.product_status?.status_name
+                  ? product.reports?.[0]?.product_status?.status_name
+                  : "No Reports"}
               </div>
             </div>
           </div>
@@ -38,18 +49,22 @@ const ProductCards = ({ product }) => {
             {product.brand} • {product.description}
           </div>
           <div className={styles.productSubDetails}>
-            <div className={styles.category}>{product.categories.name}</div>
+            <div className={styles.category}>{product.categories?.name}</div>
             <div className={styles.price}>
-              $ {product.price ? product.price : "--"}
+              ${" "}
+              {product.reports?.[0]?.price ? product.reports?.[0]?.price : "--"}
             </div>
           </div>
           <div className={styles.productMetadata}>
             <div className={styles.location}>
               <MapPin size={14} />
-              Costco North London
+              {store.name}
             </div>
             <div className={styles.time}>
-              <Clock4 size={14} />5 min ago
+              <Clock4 size={14} />{" "}
+              {product.reports?.[0]?.created_at
+                ? getTimeAgo(product.reports[0].created_at)
+                : "--"}
             </div>
           </div>
         </div>

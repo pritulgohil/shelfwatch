@@ -1,26 +1,34 @@
-"use client"; // Client component because we use useState
+"use client";
 
 import { createContext, useState, useContext } from "react";
 
-// 1️⃣ Create Context
 export const AppContext = createContext(null);
 
-// 2️⃣ Create Provider
 export const AppProvider = ({ children }) => {
-  // Shared state
   const [selectedCategory, setSelectedCategory] = useState(
     "52efbe65-925b-4d93-8c23-63d0dcc3c31a",
   );
-  // Values to expose
+  const [stores, setStores] = useState([]);
+  const [currentStore, setCurrentStore] = useState([]);
+  const [currentProduct, setCurrentProduct] = useState([]);
+  const [store, setStore] = useState(null);
+
   const value = {
     selectedCategory,
     setSelectedCategory,
+    stores,
+    setStores,
+    currentStore,
+    setCurrentStore,
+    currentProduct,
+    setCurrentProduct,
+    store,
+    setStore,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
-// 3️⃣ Custom Hook for consuming context
 export const useAppContext = () => {
   const context = useContext(AppContext);
   if (!context) {

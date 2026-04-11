@@ -1,11 +1,11 @@
-import { getProductsbyId } from "@/lib/database/products/products";
+import { getStoreById } from "@/lib/database/stores/stores";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
   try {
-    const { category_id } = await params;
-    const products = await getProductsbyId(category_id);
-    return NextResponse.json(products || [], { status: 200 });
+    const { store_id } = await params;
+    const store = await getStoreById(store_id);
+    return NextResponse.json(store || [], { status: 200 });
   } catch (error) {
     console.error("API error:", error);
     return NextResponse.json(

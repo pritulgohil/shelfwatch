@@ -8,3 +8,18 @@ export async function getStores() {
   }
   return data;
 }
+
+export async function getStoreById(id) {
+  const { data, error } = await supabase
+    .from("stores")
+    .select("name, address")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error("Error fetching store:", error);
+    return null;
+  }
+
+  return data;
+}
