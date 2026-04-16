@@ -8,18 +8,20 @@ import ProductSpecifications from "../../Product/ProductSpecifications/ProductSp
 import RecentReports from "../../Product/RecentReports/RecentReports";
 import Footer from "@/app/components/Layout/Footer/Footer";
 
-const ProductDisplay = ({ product }) => {
+const ProductDisplay = ({ currentProductDisplay }) => {
   return (
     <>
       <div className={styles.mainContainer}>
         <div className={styles.contentContainer}>
           <div className={styles.leftSide}>
-            <ProductOverview product={product} />
-            <ProductSpecifications />
+            <ProductOverview currentProductDisplay={currentProductDisplay} />
+            <ProductSpecifications
+              currentProductDisplay={currentProductDisplay}
+            />
             <RecentReports />
           </div>
           <div className={styles.rightSide}>
-            <PriceCard />
+            <PriceCard currentProductDisplay={currentProductDisplay} />
             <StockReportButton />
             <ActivityReportCard />
           </div>
@@ -28,10 +30,12 @@ const ProductDisplay = ({ product }) => {
       </div>
       <div className={styles.mobileMainContainer}>
         <div className={styles.mobileContentContainer}>
-          <ProductOverview product={product} />
+          <ProductOverview currentProductDisplay={currentProductDisplay} />
           <PriceCard />
           <StockReportButton />
-          <ProductSpecifications />
+          <ProductSpecifications
+            currentProductDisplay={currentProductDisplay}
+          />
           <RecentReports />
           <ActivityReportCard />
         </div>

@@ -1,8 +1,9 @@
 import Footer from "./components/Layout/Footer/Footer";
 import Header from "./components/Layout/Header/Header";
 import Hero from "./components/Layout/Hero/Hero";
-import ProductRender from "@/app/components/Renderers/ProductRender/ProductRender";
+import ReportRender from "@/app/components/Renderers/ReportRender/ReportRender";
 import StoreSelector from "@/app/components/Renderers/StoreSelector/StoreSelector";
+import styles from "./page.module.css";
 
 export default async function Home() {
   return (
@@ -10,7 +11,8 @@ export default async function Home() {
       <Header />
       <Hero />
       <StoreSelector />
-      <ProductRender />
+      <div className={styles.sectionHeader}>Recent Reports</div>
+      <ReportRender />
       <Footer />
     </>
   );

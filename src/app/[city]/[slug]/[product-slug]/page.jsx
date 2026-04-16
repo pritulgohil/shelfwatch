@@ -1,29 +1,46 @@
+"use client";
+
 import StoreHeader from "@/app/components/Common/PageHeader/PageHeader";
-import stores from "@/data/stores.json";
-import products from "@/data/products.json";
-import { notFound } from "next/navigation";
 import ProductDisplay from "@/app/components/Renderers/ProductDisplay/ProductDisplay";
+import { useAppContext } from "@/context/AppContext";
+import { useState, useEffect } from "react";
 
-export default async function StorePage({ params }) {
-  const { city, slug, "product-slug": productSlug } = await params;
+export default function StorePage({ params }) {
+  const { currentProduct, currentStore } = useAppContext();
+  const [currentProductDisplay, setCurrentProductDisplay] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const storeData = stores.find((s) => s.slug === slug && s.city === city);
+  useEffect(() => {
+    if (!currentProduct || !currentStore) return;
+    const fetchProduct = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(
+          `/api/products/product-display/${currentProduct}/${currentStore}`,
+        );
+        if (!res.ok) throw new Error("Failed to fetch product");
+        const data = await res.json();
+        setCurrentProductDisplay(data);
+      } catch (err) {
+        console.error("Error fetching product:", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const productData = products.find((p) => p.slug === productSlug);
+    fetchProduct();
+  }, [currentProduct, currentStore]);
 
-  if (!storeData || !productData) {
-    return notFound();
-  }
-
-  const store = {
-    name: productData.name,
-    address: storeData.name,
-  };
+  if (loading) return <div>Loading product...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!currentProduct) return <div>No product found</div>;
 
   return (
     <>
-      <StoreHeader store={store} />
-      <ProductDisplay product={productData} />
+      <StoreHeader store={currentStore} />
+      <ProductDisplay currentProductDisplay={currentProductDisplay} />
     </>
   );
 }
