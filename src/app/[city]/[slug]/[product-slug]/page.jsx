@@ -6,11 +6,14 @@ import { useAppContext } from "@/context/AppContext";
 import { useState, useEffect } from "react";
 
 export default function StorePage({ params }) {
-  const { currentProduct, currentStore } = useAppContext();
-  const [currentProductDisplay, setCurrentProductDisplay] = useState(null);
+  const {
+    currentProduct,
+    currentStore,
+    currentProductDisplay,
+    setCurrentProductDisplay,
+  } = useAppContext();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     if (!currentProduct || !currentStore) return;
     const fetchProduct = async () => {

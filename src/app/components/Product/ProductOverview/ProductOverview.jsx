@@ -23,9 +23,11 @@ const ProductOverview = ({ currentProductDisplay }) => {
       </div>
       <div className={styles.productOverview}>
         <div
-          className={`${styles.productStatus} ${currentProductDisplay.product_status.status_name === "In Stock" ? styles.inStockStatus : currentProductDisplay.product_status.status_name === "Low Stock" ? styles.lowStockStatus : currentProductDisplay.product_status.status_name === "No Reports" ? styles.noReportsStatus : styles.outOfStockStatus}`}
+          className={`${styles.productStatus} ${currentProductDisplay.reports?.[0]?.product_status?.status_name === "In Stock" ? styles.inStockStatus : currentProductDisplay.reports?.[0]?.product_status?.status_name === "Low Stock" ? styles.lowStockStatus : currentProductDisplay.reports?.[0]?.product_status?.status_name === "No Reports" ? styles.noReportsStatus : styles.outOfStockStatus}`}
         >
-          {currentProductDisplay.product_status.status_name}
+          {currentProductDisplay.reports?.[0]?.product_status?.status_name
+            ? currentProductDisplay.reports?.[0]?.product_status?.status_name
+            : "No Reports"}
         </div>
         <div className={styles.productHeader}>
           {currentProductDisplay.brand} {currentProductDisplay.name}
