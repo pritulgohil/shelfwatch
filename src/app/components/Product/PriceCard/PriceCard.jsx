@@ -5,11 +5,17 @@ import { ThumbsUp, ThumbsDown } from "lucide-react";
 
 export const PriceCard = ({ currentProductDisplay }) => {
   console.log("Test", currentProductDisplay);
+  if (!currentProductDisplay) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className={styles.priceCard}>
       <div className={styles.priceHeader}>Reported Price</div>
       <div className={styles.productPrice}>
-        ${currentProductDisplay && currentProductDisplay.reports?.[0]?.price}
+        $
+        {currentProductDisplay.reports?.[0]?.price
+          ? currentProductDisplay.reports?.[0]?.price
+          : "--"}
       </div>
       <div className={styles.priceReport}>
         <Button

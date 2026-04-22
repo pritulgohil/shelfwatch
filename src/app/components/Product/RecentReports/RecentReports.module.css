@@ -27,16 +27,35 @@
 
 .topContainer {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
 }
 
 .stockPill {
-  color: #20c45d;
-  background-color: #e5f7e9;
   font-size: 12px;
-  padding: 2px 12px;
-  border-radius: 12px;
-  height: 20px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inStockStatus {
+  border: 1px solid #21c55d;
+  color: #21c55d;
+  background-color: #e5f7e9;
+}
+
+.lowStockStatus {
+  border: 1px solid #a16207;
+  color: #a16207;
+  background-color: #fef9c3;
+}
+
+.outOfStockStatus {
+  border: 1px solid #dd2928;
+  color: #dd2928;
+  background-color: #fdeaeb;
 }
 
 .midContainer {

@@ -2,272 +2,106 @@ import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger,
 } from "@/components/ui/accordion";
+import { AccordionTrigger } from "@/components/ui/accordion";
+
 import styles from "./RecentReports.module.css";
 import { Image } from "lucide-react";
+import { useAppContext } from "@/context/AppContext";
+import { getTimeAgo } from "@/lib/utils/timeAgo";
 
 function RecentReports() {
+  const { currentProductDisplay } = useAppContext();
+
+  console.log(
+    "Current Product Display in RecentReports:",
+    currentProductDisplay,
+  );
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.sectionHeader}>Recent Reports</div>
+
       <div className={styles.accordionContainer}>
         <Accordion
           type="single"
           collapsible
-          defaultValue="billing"
           className="w-full rounded-lg border"
         >
-          <AccordionItem value="1" className="px-4">
-            <AccordionTrigger className="py-4 hover:no-underline">
+          {currentProductDisplay?.reports?.map((report, index) => {
+            const hasImage = !!report.image_url;
+
+            const reportHeader = (
               <div className={styles.accordionTrigger}>
                 <div className={styles.leftSide}>
                   <div className={styles.topContainer}>
-                    <div className={styles.stockPill}>In Stock</div>
-                    <div className={styles.price}>$579.99</div>
+                    <div
+                      className={`${styles.stockPill} ${
+                        report.product_status?.status_name === "In Stock"
+                          ? styles.inStockStatus
+                          : report.product_status?.status_name === "Low Stock"
+                            ? styles.lowStockStatus
+                            : report.product_status?.status_name ===
+                                "No Reports"
+                              ? styles.noReportsStatus
+                              : styles.outOfStockStatus
+                      }`}
+                    >
+                      {report.product_status?.status_name || "Unknown"}
+                    </div>
+
+                    <div className={styles.price}>${report.price ?? "--"}</div>
                   </div>
+
                   <div className={styles.midContainer}>
-                    Reported by <span className={styles.userName}>Alex M.</span>
+                    Reported by{" "}
+                    <span className={styles.userName}>
+                      {report.reported_by || "Anonymous"}
+                    </span>
                   </div>
-                  <div className={styles.bottomContainer}>25 minutes ago</div>
+
+                  <div className={styles.bottomContainer}>
+                    {report.created_at ? getTimeAgo(report.created_at) : ""}
+                  </div>
                 </div>
+
                 <div className={styles.rightSide}>
-                  <div className={styles.photoIndicator}>
-                    <Image size={14} />
-                    View Photo
-                  </div>
+                  {hasImage && (
+                    <div className={styles.photoIndicator}>
+                      <Image size={14} />
+                      View Photo
+                    </div>
+                  )}
                 </div>
               </div>
-            </AccordionTrigger>
-            <AccordionContent className="pb-4 text-sm text-muted-foreground data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up overflow-hidden">
-              Hello World
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="2" className="px-4">
-            <AccordionTrigger className="py-4 hover:no-underline">
-              <div className={styles.accordionTrigger}>
-                <div className={styles.leftSide}>
-                  <div className={styles.topContainer}>
-                    <div className={styles.stockPill}>In Stock</div>
-                    <div className={styles.price}>$579.99</div>
-                  </div>
-                  <div className={styles.midContainer}>
-                    Reported by <span className={styles.userName}>Alex M.</span>
-                  </div>
-                  <div className={styles.bottomContainer}>25 minutes ago</div>
-                </div>
-                <div className={styles.rightSide}>
-                  <div className={styles.photoIndicator}>
-                    <Image size={14} />
-                    View Photo
-                  </div>
-                </div>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="pb-4 text-sm text-muted-foreground data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up overflow-hidden">
-              Hello World
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="2" className="px-4">
-            <AccordionTrigger className="py-4 hover:no-underline">
-              <div className={styles.accordionTrigger}>
-                <div className={styles.leftSide}>
-                  <div className={styles.topContainer}>
-                    <div className={styles.stockPill}>In Stock</div>
-                    <div className={styles.price}>$579.99</div>
-                  </div>
-                  <div className={styles.midContainer}>
-                    Reported by <span className={styles.userName}>Alex M.</span>
-                  </div>
-                  <div className={styles.bottomContainer}>25 minutes ago</div>
-                </div>
-                <div className={styles.rightSide}>
-                  <div className={styles.photoIndicator}>
-                    <Image size={14} />
-                    View Photo
-                  </div>
-                </div>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="pb-4 text-sm text-muted-foreground data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up overflow-hidden">
-              Hello World
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="2" className="px-4">
-            <AccordionTrigger className="py-4 hover:no-underline">
-              <div className={styles.accordionTrigger}>
-                <div className={styles.leftSide}>
-                  <div className={styles.topContainer}>
-                    <div className={styles.stockPill}>In Stock</div>
-                    <div className={styles.price}>$579.99</div>
-                  </div>
-                  <div className={styles.midContainer}>
-                    Reported by <span className={styles.userName}>Alex M.</span>
-                  </div>
-                  <div className={styles.bottomContainer}>25 minutes ago</div>
-                </div>
-                <div className={styles.rightSide}>
-                  <div className={styles.photoIndicator}>
-                    <Image size={14} />
-                    View Photo
-                  </div>
-                </div>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="pb-4 text-sm text-muted-foreground data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up overflow-hidden">
-              Hello World
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="2" className="px-4">
-            <AccordionTrigger className="py-4 hover:no-underline">
-              <div className={styles.accordionTrigger}>
-                <div className={styles.leftSide}>
-                  <div className={styles.topContainer}>
-                    <div className={styles.stockPill}>In Stock</div>
-                    <div className={styles.price}>$579.99</div>
-                  </div>
-                  <div className={styles.midContainer}>
-                    Reported by <span className={styles.userName}>Alex M.</span>
-                  </div>
-                  <div className={styles.bottomContainer}>25 minutes ago</div>
-                </div>
-                <div className={styles.rightSide}>
-                  <div className={styles.photoIndicator}>
-                    <Image size={14} />
-                    View Photo
-                  </div>
-                </div>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="pb-4 text-sm text-muted-foreground data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up overflow-hidden">
-              Hello World
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="2" className="px-4">
-            <AccordionTrigger className="py-4 hover:no-underline">
-              <div className={styles.accordionTrigger}>
-                <div className={styles.leftSide}>
-                  <div className={styles.topContainer}>
-                    <div className={styles.stockPill}>In Stock</div>
-                    <div className={styles.price}>$579.99</div>
-                  </div>
-                  <div className={styles.midContainer}>
-                    Reported by <span className={styles.userName}>Alex M.</span>
-                  </div>
-                  <div className={styles.bottomContainer}>25 minutes ago</div>
-                </div>
-                <div className={styles.rightSide}>
-                  <div className={styles.photoIndicator}>
-                    <Image size={14} />
-                    View Photo
-                  </div>
-                </div>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="pb-4 text-sm text-muted-foreground data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up overflow-hidden">
-              Hello World
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="2" className="px-4">
-            <AccordionTrigger className="py-4 hover:no-underline">
-              <div className={styles.accordionTrigger}>
-                <div className={styles.leftSide}>
-                  <div className={styles.topContainer}>
-                    <div className={styles.stockPill}>In Stock</div>
-                    <div className={styles.price}>$579.99</div>
-                  </div>
-                  <div className={styles.midContainer}>
-                    Reported by <span className={styles.userName}>Alex M.</span>
-                  </div>
-                  <div className={styles.bottomContainer}>25 minutes ago</div>
-                </div>
-                <div className={styles.rightSide}>
-                  <div className={styles.photoIndicator}>
-                    <Image size={14} />
-                    View Photo
-                  </div>
-                </div>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="pb-4 text-sm text-muted-foreground data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up overflow-hidden">
-              Hello World
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="2" className="px-4">
-            <AccordionTrigger className="py-4 hover:no-underline">
-              <div className={styles.accordionTrigger}>
-                <div className={styles.leftSide}>
-                  <div className={styles.topContainer}>
-                    <div className={styles.stockPill}>In Stock</div>
-                    <div className={styles.price}>$579.99</div>
-                  </div>
-                  <div className={styles.midContainer}>
-                    Reported by <span className={styles.userName}>Alex M.</span>
-                  </div>
-                  <div className={styles.bottomContainer}>25 minutes ago</div>
-                </div>
-                <div className={styles.rightSide}>
-                  <div className={styles.photoIndicator}>
-                    <Image size={14} />
-                    View Photo
-                  </div>
-                </div>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="pb-4 text-sm text-muted-foreground data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up overflow-hidden">
-              Hello World
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="2" className="px-4">
-            <AccordionTrigger className="py-4 hover:no-underline">
-              <div className={styles.accordionTrigger}>
-                <div className={styles.leftSide}>
-                  <div className={styles.topContainer}>
-                    <div className={styles.stockPill}>In Stock</div>
-                    <div className={styles.price}>$579.99</div>
-                  </div>
-                  <div className={styles.midContainer}>
-                    Reported by <span className={styles.userName}>Alex M.</span>
-                  </div>
-                  <div className={styles.bottomContainer}>25 minutes ago</div>
-                </div>
-                <div className={styles.rightSide}>
-                  <div className={styles.photoIndicator}>
-                    <Image size={14} />
-                    View Photo
-                  </div>
-                </div>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="pb-4 text-sm text-muted-foreground data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up overflow-hidden">
-              Hello World
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="2" className="px-4">
-            <AccordionTrigger className="py-4 hover:no-underline">
-              <div className={styles.accordionTrigger}>
-                <div className={styles.leftSide}>
-                  <div className={styles.topContainer}>
-                    <div className={styles.stockPill}>In Stock</div>
-                    <div className={styles.price}>$579.99</div>
-                  </div>
-                  <div className={styles.midContainer}>
-                    Reported by <span className={styles.userName}>Alex M.</span>
-                  </div>
-                  <div className={styles.bottomContainer}>25 minutes ago</div>
-                </div>
-                <div className={styles.rightSide}>
-                  <div className={styles.photoIndicator}>
-                    <Image size={14} />
-                    View Photo
-                  </div>
-                </div>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="pb-4 text-sm text-muted-foreground data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up overflow-hidden">
-              Hello World
-            </AccordionContent>
-          </AccordionItem>
+            );
+
+            return (
+              <AccordionItem
+                key={report.id || index}
+                value={String(index)}
+                className="px-4"
+              >
+                {hasImage ? (
+                  <AccordionTrigger className="py-4 hover:no-underline">
+                    {reportHeader}
+                  </AccordionTrigger>
+                ) : (
+                  <div className="py-4">{reportHeader}</div>
+                )}
+
+                {hasImage && (
+                  <AccordionContent className="pb-4 overflow-hidden">
+                    <img
+                      src={report.image_url}
+                      alt="Report"
+                      className="w-48 h-48 object-cover rounded-lg"
+                    />
+                  </AccordionContent>
+                )}
+              </AccordionItem>
+            );
+          })}
         </Accordion>
       </div>
     </div>

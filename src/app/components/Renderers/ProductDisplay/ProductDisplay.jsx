@@ -31,7 +31,7 @@ const ProductDisplay = ({ currentProductDisplay }) => {
       <div className={styles.mobileMainContainer}>
         <div className={styles.mobileContentContainer}>
           <ProductOverview currentProductDisplay={currentProductDisplay} />
-          <PriceCard />
+          <PriceCard currentProductDisplay={currentProductDisplay} />
           <StockReportButton />
           <ProductSpecifications
             currentProductDisplay={currentProductDisplay}
