@@ -129,6 +129,30 @@ export async function getProductsbyId(categoryId, storeId) {
   return data;
 }
 
+// export async function getProductDisplay(productId, storeId) {
+//   const { data, error } = await supabase
+//     .from("products")
+//     .select(
+//       `
+//       *,
+//       categories(name),
+//       product_status(status_name),
+//       reports(price, image_url, reported_by, created_at)
+//       `,
+//     )
+//     .eq("id", productId)
+//     .eq("reports.store_id", storeId)
+//     .eq("reports.product_id", productId)
+//     .single();
+
+//   if (error) {
+//     console.error("Error fetching product display:", error);
+//     return null;
+//   }
+
+//   return data;
+// }
+
 export async function getProductDisplay(productId, storeId) {
   const { data, error } = await supabase
     .from("products")
@@ -136,9 +160,15 @@ export async function getProductDisplay(productId, storeId) {
       `
       *,
       categories(name),
-      product_status(status_name),
-      reports(price, image_url, reported_by, created_at)
-      `,
+      reports(
+        price,
+        image_url,
+        reported_by,
+        created_at,
+        status_id,
+        product_status(status_name)
+      )
+    `,
     )
     .eq("id", productId)
     .eq("reports.store_id", storeId)

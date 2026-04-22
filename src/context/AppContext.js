@@ -12,6 +12,7 @@ export const AppProvider = ({ children }) => {
   const [currentStore, setCurrentStore] = useState([]);
   const [currentProduct, setCurrentProduct] = useState([]);
   const [store, setStore] = useState(null);
+  const [currentProductDisplay, setCurrentProductDisplay] = useState(null);
 
   const value = {
     selectedCategory,
@@ -24,6 +25,8 @@ export const AppProvider = ({ children }) => {
     setCurrentProduct,
     store,
     setStore,
+    currentProductDisplay,
+    setCurrentProductDisplay,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
