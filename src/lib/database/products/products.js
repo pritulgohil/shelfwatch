@@ -59,8 +59,7 @@ export async function getProducts(storeId) {
     `,
     )
     .eq("reports.store_id", storeId)
-    .order("created_at", { foreignTable: "reports", ascending: false })
-    .limit(1, { foreignTable: "reports" });
+    .order("created_at", { foreignTable: "reports", ascending: false });
 
   if (error) {
     console.error("Error fetching products:", error);
@@ -173,6 +172,10 @@ export async function getProductDisplay(productId, storeId) {
     .eq("id", productId)
     .eq("reports.store_id", storeId)
     .eq("reports.product_id", productId)
+    .order("created_at", {
+      referencedTable: "reports",
+      ascending: false,
+    })
     .single();
 
   if (error) {

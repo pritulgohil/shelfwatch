@@ -6,8 +6,7 @@ import { useAppContext } from "@/context/AppContext";
 import { getTimeAgo } from "@/lib/utils/timeAgo";
 
 const ReportCards = ({ report }) => {
-  const { setCurrentProduct, currentProduct, currentStore, setCurrentStore } =
-    useAppContext();
+  const { setCurrentProduct, setCurrentStore } = useAppContext();
 
   const handleCurrentProduct = (report) => {
     setCurrentProduct(report.products.id);
@@ -21,7 +20,7 @@ const ReportCards = ({ report }) => {
       <div className={styles.leftSide}>
         <div className={styles.imageContainer}>
           <Image
-            src="/images/placeholder.png"
+            src={report.image_url || "/images/placeholder.jpg"}
             alt="Store Image"
             width={50}
             height={50}
