@@ -80,10 +80,6 @@
   gap: 0.6rem;
 }
 
-.category {
-  font-size: 12px;
-}
-
 .price {
   font-size: 14px;
   font-weight: 700;
@@ -94,6 +90,7 @@
   color: gray;
   padding: 2px 12px;
   border-radius: 12px;
+  font-size: 12px;
 }
 
 .productMetadata {
@@ -158,5 +155,14 @@
 
   .outOfStock {
     width: 80px;
+  }
+
+  .category {
+    /* width: 150px; */
+    width: fit-content;
+    max-width: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
