@@ -1,176 +1,3 @@
-// "use client";
-
-// import React, { useState } from "react";
-// import styles from "./StockReportButton.module.css";
-// import { Button } from "@/components/ui/button";
-// import { CirclePlus, ImagePlus } from "lucide-react";
-// import { Input } from "@/components/ui/input";
-// import { createReport } from "@/lib/database/reports/reports";
-// import { useAppContext } from "@/context/AppContext";
-
-// import {
-//   Dialog,
-//   DialogContent,
-//   DialogHeader,
-//   DialogTitle,
-//   DialogDescription,
-//   DialogTrigger,
-// } from "@/components/ui/dialog";
-
-// const statusMap = {
-//   "In Stock": "c100aa57-0537-4691-8fee-4707ec1823f4",
-//   "Low Stock": "e94276e3-f6a2-43c1-9802-ba37ef43c20f",
-//   "Out of Stock": "96be1b07-e6b0-45cc-b683-fc20d74113bb",
-// };
-
-// const StockReportButton = () => {
-//   const { currentProductDisplay, currentStore } = useAppContext();
-
-//   const [stockStatus, setStockStatus] = useState("In Stock");
-//   const [imageFile, setImageFile] = useState(null);
-//   const [price, setPrice] = useState("");
-//   const [loading, setLoading] = useState(false);
-//   console.log("Current Store", currentStore);
-//   const handleSubmitReport = async () => {
-//     setLoading(true);
-
-//     const result = await createReport({
-//       productId: currentProductDisplay?.id,
-//       storeId: currentStore,
-//       categoryId: currentProductDisplay?.category_id,
-//       statusId: statusMap[stockStatus],
-//       price,
-//       imageFile,
-//     });
-
-//     if (result.success) {
-//       alert("Report submitted");
-
-//       setPrice("");
-//       setStockStatus("In Stock");
-//     } else {
-//       alert("Failed to submit report");
-//     }
-
-//     setLoading(false);
-//   };
-
-//   return (
-//     <div className={styles.reportStockButtonContainer}>
-//       <Dialog>
-//         <DialogTrigger asChild>
-//           <Button
-//             variant="outline"
-//             className={`${styles.reportStockButton} w-full p-6 cursor-pointer shadow-none`}
-//             size="sm"
-//           >
-//             <CirclePlus size={16} />
-//             Report Stock Update
-//           </Button>
-//         </DialogTrigger>
-
-//         <DialogContent className={styles.dialogContent}>
-//           <DialogHeader>
-//             <DialogTitle>Report Stock Update</DialogTitle>
-
-//             <DialogDescription>
-//               Enter the stock changes for this item.
-//             </DialogDescription>
-//           </DialogHeader>
-
-//           <div className={styles.formBody}>
-//             {/* Stock Status */}
-//             <div className={styles.inputContainer}>
-//               <div className={styles.formFieldTitle}>Stock Status</div>
-
-//               <div className={styles.formField}>
-//                 <div
-//                   className={`${styles.stockPill}
-//                     ${stockStatus === "In Stock" ? styles.inStockActive : ""}`}
-//                   onClick={() => setStockStatus("In Stock")}
-//                 >
-//                   In Stock
-//                 </div>
-
-//                 <div
-//                   className={`${styles.stockPill}
-//                     ${
-//                       stockStatus === "Low Stock" ? styles.lowStockActive : ""
-//                     }`}
-//                   onClick={() => setStockStatus("Low Stock")}
-//                 >
-//                   Low Stock
-//                 </div>
-
-//                 <div
-//                   className={`${styles.stockPill}
-//                     ${
-//                       stockStatus === "Out of Stock"
-//                         ? styles.outOfStockActive
-//                         : ""
-//                     }`}
-//                   onClick={() => setStockStatus("Out of Stock")}
-//                 >
-//                   Out of Stock
-//                 </div>
-//               </div>
-//             </div>
-
-//             {/* Price */}
-//             <div className={styles.inputContainer}>
-//               <div className={styles.formFieldTitle}>Price</div>
-
-//               <div className="relative w-full">
-//                 <span className="absolute left-3 top-1/2 -translate-y-1/2">
-//                   $
-//                 </span>
-
-//                 <Input
-//                   type="number"
-//                   value={price}
-//                   onChange={(e) => setPrice(e.target.value)}
-//                   placeholder="0.00"
-//                   className="pl-7 h-12"
-//                 />
-//               </div>
-//             </div>
-
-//             {/* Placeholder upload UI only */}
-//             <div className={styles.inputContainer}>
-//               <div className={styles.formFieldTitle}>Upload Image</div>
-
-//               <label className={styles.uploadBox}>
-//                 <input
-//                   type="file"
-//                   accept="image/*"
-//                   hidden
-//                   onChange={(e) => setImageFile(e.target.files?.[0] || null)}
-//                 />
-//                 <div className="flex flex-col items-center gap-2">
-//                   <ImagePlus size={20} />
-//                   <span>Add Image</span>
-//                 </div>
-//               </label>
-//             </div>
-
-//             <div className={styles.inputContainer}>
-//               <Button
-//                 className={styles.submitButton}
-//                 size="sm"
-//                 disabled={loading}
-//                 onClick={handleSubmitReport}
-//               >
-//                 {loading ? "Submitting..." : "Submit Report"}
-//               </Button>
-//             </div>
-//           </div>
-//         </DialogContent>
-//       </Dialog>
-//     </div>
-//   );
-// };
-
-// export default StockReportButton;
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -196,14 +23,15 @@ const statusMap = {
   "Out of Stock": "96be1b07-e6b0-45cc-b683-fc20d74113bb",
 };
 
-const StockReportButton = () => {
+const StockReportButton = ({ onSuccess }) => {
   const { currentProductDisplay, currentStore } = useAppContext();
-
+  const [open, setOpen] = useState(false);
   const [stockStatus, setStockStatus] = useState("In Stock");
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [price, setPrice] = useState("");
   const [loading, setLoading] = useState(false);
+  const [priceError, setPriceError] = useState(false);
 
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
@@ -230,6 +58,12 @@ const StockReportButton = () => {
   }, [imagePreview]);
 
   const handleSubmitReport = async () => {
+    if (!price) {
+      setPriceError(true);
+      return;
+    }
+
+    setPriceError(false);
     setLoading(true);
 
     const result = await createReport({
@@ -242,27 +76,19 @@ const StockReportButton = () => {
     });
 
     if (result.success) {
-      alert("Report submitted");
-
       setPrice("");
       setStockStatus("In Stock");
       setImageFile(null);
-
-      if (imagePreview) {
-        URL.revokeObjectURL(imagePreview);
-      }
-
       setImagePreview(null);
-    } else {
-      alert("Failed to submit report");
+      setOpen(false);
+      onSuccess?.(); // 👈 refresh product data
     }
-
     setLoading(false);
   };
 
   return (
     <div className={styles.reportStockButtonContainer}>
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button
             variant="outline"
@@ -333,9 +159,14 @@ const StockReportButton = () => {
                 <Input
                   type="number"
                   value={price}
-                  onChange={(e) => setPrice(e.target.value)}
+                  onChange={(e) => {
+                    setPrice(e.target.value);
+                    if (e.target.value) setPriceError(false);
+                  }}
                   placeholder="0.00"
-                  className="pl-7 h-12"
+                  className={`pl-7 h-12 border ${
+                    priceError ? "border-2 border-red-500" : ""
+                  }`}
                 />
               </div>
             </div>
