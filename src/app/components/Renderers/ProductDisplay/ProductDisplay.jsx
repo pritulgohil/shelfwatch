@@ -8,7 +8,7 @@ import ProductSpecifications from "../../Product/ProductSpecifications/ProductSp
 import RecentReports from "../../Product/RecentReports/RecentReports";
 import Footer from "@/app/components/Layout/Footer/Footer";
 
-const ProductDisplay = ({ currentProductDisplay }) => {
+const ProductDisplay = ({ currentProductDisplay, onSuccess }) => {
   return (
     <>
       <div className={styles.mainContainer}>
@@ -22,7 +22,7 @@ const ProductDisplay = ({ currentProductDisplay }) => {
           </div>
           <div className={styles.rightSide}>
             <PriceCard currentProductDisplay={currentProductDisplay} />
-            <StockReportButton />
+            <StockReportButton onSuccess={onSuccess} />
             <ActivityReportCard />
           </div>
         </div>
@@ -32,7 +32,7 @@ const ProductDisplay = ({ currentProductDisplay }) => {
         <div className={styles.mobileContentContainer}>
           <ProductOverview currentProductDisplay={currentProductDisplay} />
           <PriceCard currentProductDisplay={currentProductDisplay} />
-          <StockReportButton />
+          <StockReportButton onSuccess={onSuccess} />
           <ProductSpecifications
             currentProductDisplay={currentProductDisplay}
           />
