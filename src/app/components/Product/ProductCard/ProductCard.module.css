@@ -159,4 +159,12 @@
   .outOfStock {
     width: 80px;
   }
+
+  .category {
+    width: fit-content;
+    max-width: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

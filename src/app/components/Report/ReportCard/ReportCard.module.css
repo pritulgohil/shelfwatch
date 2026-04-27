@@ -158,7 +158,6 @@
   }
 
   .category {
-    /* width: 150px; */
     width: fit-content;
     max-width: 70%;
     white-space: nowrap;
