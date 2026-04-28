@@ -113,6 +113,7 @@ export async function createReport({
   categoryId,
   price,
   imageFile,
+  nickname,
 }) {
   try {
     let imageUrl = null;
@@ -129,9 +130,9 @@ export async function createReport({
           store_id: storeId,
           price: price ? Number(price) : null,
           image_url: imageUrl,
-          reported_by: "Anonymous",
           status_id: statusId,
           category_id: categoryId,
+          reported_by: nickname || "shopper",
         },
       ])
       .select()
