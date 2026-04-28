@@ -53,7 +53,7 @@ function RecentReports() {
                     <div className={styles.midContainer}>
                       Reported by{" "}
                       <span className={styles.userName}>
-                        {report.reported_by || "Anonymous"}
+                        {report.reported_by}
                       </span>
                     </div>
 

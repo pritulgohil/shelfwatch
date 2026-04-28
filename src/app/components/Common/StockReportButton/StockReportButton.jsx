@@ -32,6 +32,7 @@ const StockReportButton = ({ onSuccess }) => {
   const [price, setPrice] = useState("");
   const [loading, setLoading] = useState(false);
   const [priceError, setPriceError] = useState(false);
+  const [nickname, setNickname] = useState("");
 
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
@@ -73,6 +74,7 @@ const StockReportButton = ({ onSuccess }) => {
       statusId: statusMap[stockStatus],
       price,
       imageFile,
+      nickname: nickname || "shopper",
     });
 
     if (result.success) {
@@ -80,6 +82,7 @@ const StockReportButton = ({ onSuccess }) => {
       setStockStatus("In Stock");
       setImageFile(null);
       setImagePreview(null);
+      setNickname("");
       setOpen(false);
       onSuccess?.(); // 👈 refresh product data
     }
@@ -173,7 +176,9 @@ const StockReportButton = ({ onSuccess }) => {
 
             {/* Image Upload + Preview */}
             <div className={styles.inputContainer}>
-              <div className={styles.formFieldTitle}>Upload Image</div>
+              <div className={styles.formFieldTitle}>
+                Upload Image (optional)
+              </div>
 
               <label className={styles.uploadBox}>
                 <input
@@ -196,6 +201,20 @@ const StockReportButton = ({ onSuccess }) => {
                   </div>
                 )}
               </label>
+            </div>
+
+            <div className={styles.inputContainer}>
+              <div className={styles.formFieldTitle}>Nickname (optional)</div>
+
+              <Input
+                type="text"
+                value={nickname}
+                onChange={(e) => {
+                  setNickname(e.target.value);
+                }}
+                placeholder="e.g. StockSpotter119"
+                className="h-12"
+              />
             </div>
 
             {/* Submit */}
