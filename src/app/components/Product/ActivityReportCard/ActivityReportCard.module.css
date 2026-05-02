@@ -23,6 +23,9 @@
 
 .activityName {
   color: gray;
+  display: flex;
+  gap: 4px;
+  align-items: center;
 }
 
 .activityDetailsContainer {

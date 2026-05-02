@@ -23,7 +23,7 @@ const ProductDisplay = ({ currentProductDisplay, onSuccess }) => {
           <div className={styles.rightSide}>
             <PriceCard currentProductDisplay={currentProductDisplay} />
             <StockReportButton onSuccess={onSuccess} />
-            <ActivityReportCard />
+            <ActivityReportCard currentProductDisplay={currentProductDisplay} />
           </div>
         </div>
         <Footer />
@@ -37,7 +37,7 @@ const ProductDisplay = ({ currentProductDisplay, onSuccess }) => {
             currentProductDisplay={currentProductDisplay}
           />
           <RecentReports />
-          <ActivityReportCard />
+          <ActivityReportCard currentProductDisplay={currentProductDisplay} />
         </div>
         <Footer />
       </div>
