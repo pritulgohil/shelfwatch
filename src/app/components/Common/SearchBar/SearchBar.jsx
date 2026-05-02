@@ -61,7 +61,7 @@ const SearchBar = () => {
                     <div className={styles.leftSide}>
                       <div className={styles.imageContainer}>
                         <Image
-                          src="/images/placeholder.png"
+                          src="/images/placeholder-image.png"
                           alt="Product Image"
                           width={40}
                           height={40}
@@ -93,7 +93,7 @@ const SearchBar = () => {
                     <div className={styles.leftSide}>
                       <div className={styles.imageContainer}>
                         <Image
-                          src="/images/placeholder.png"
+                          src="/images/placeholder-image.png"
                           alt="Product Image"
                           width={40}
                           height={40}
@@ -125,7 +125,7 @@ const SearchBar = () => {
                     <div className={styles.leftSide}>
                       <div className={styles.imageContainer}>
                         <Image
-                          src="/images/placeholder.png"
+                          src="/images/placeholder-image.png"
                           alt="Product Image"
                           width={40}
                           height={40}
@@ -157,7 +157,7 @@ const SearchBar = () => {
                     <div className={styles.leftSide}>
                       <div className={styles.imageContainer}>
                         <Image
-                          src="/images/placeholder.png"
+                          src="/images/placeholder-image.png"
                           alt="Product Image"
                           width={40}
                           height={40}

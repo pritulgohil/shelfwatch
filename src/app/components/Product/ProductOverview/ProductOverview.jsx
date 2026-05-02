@@ -91,7 +91,8 @@ const ProductOverview = ({ currentProductDisplay }) => {
   const latestImageUrl =
     [...reports]
       .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-      .find((r) => r.image_url?.trim())?.image_url || "/images/placeholder.png";
+      .find((r) => r.image_url?.trim())?.image_url ||
+    "/images/placeholder-image.png";
 
   const statusName = latestReport?.product_status?.status_name || "No Reports";
 
