@@ -41,46 +41,6 @@ export async function fetchReports() {
   return data;
 }
 
-// export async function createReport({
-//   productId,
-//   storeId,
-//   statusId,
-//   categoryId,
-//   price,
-// }) {
-//   try {
-//     const { data, error } = await supabase
-//       .from("reports")
-//       .insert([
-//         {
-//           product_id: productId,
-//           store_id: storeId || null,
-//           price: price ? Number(price) : null,
-//           image_url: null,
-//           reported_by: "Anonymous",
-//           status_id: statusId,
-//           category_id: categoryId,
-//         },
-//       ])
-//       .select()
-//       .single();
-
-//     if (error) throw error;
-
-//     return {
-//       success: true,
-//       data,
-//     };
-//   } catch (error) {
-//     console.error("Create report failed:", error);
-
-//     return {
-//       success: false,
-//       error,
-//     };
-//   }
-// }
-
 /* ---------------- IMAGE UPLOAD ---------------- */
 
 export async function uploadReportImage(file) {
@@ -146,4 +106,17 @@ export async function createReport({
 
     return { success: false, error };
   }
+}
+
+// @/lib/database/reports/reports.js
+export async function incrementReportConfirm(reportId) {
+  const { data, error } = await supabase.rpc("increment_confirm_count", {
+    report_id_input: reportId,
+  });
+
+  if (error) {
+    console.error(error);
+    return false;
+  }
+  return data; // This 'data' is the boolean returned by your PostgreSQL function
 }

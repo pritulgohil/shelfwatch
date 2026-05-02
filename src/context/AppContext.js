@@ -13,6 +13,9 @@ export const AppProvider = ({ children }) => {
   const [currentProduct, setCurrentProduct] = useState([]);
   const [store, setStore] = useState(null);
   const [currentProductDisplay, setCurrentProductDisplay] = useState(null);
+  const [reportConfirmation, setreportConfirmation] = useState(null);
+  const [reportConfirmationPrice, setreportConfirmationPrice] = useState(null);
+  const [confirmedReports, setConfirmedReports] = useState(new Set());
 
   const value = {
     selectedCategory,
@@ -27,6 +30,12 @@ export const AppProvider = ({ children }) => {
     setStore,
     currentProductDisplay,
     setCurrentProductDisplay,
+    reportConfirmation,
+    setreportConfirmation,
+    reportConfirmationPrice,
+    setreportConfirmationPrice,
+    confirmedReports,
+    setConfirmedReports,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

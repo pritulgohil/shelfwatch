@@ -160,11 +160,13 @@ export async function getProductDisplay(productId, storeId) {
       *,
       categories(name),
       reports(
+        id,
         price,
         image_url,
         reported_by,
         created_at,
         status_id,
+        confirmation_counter,
         product_status(status_name)
       )
     `,
