@@ -24,7 +24,8 @@ const statusMap = {
 };
 
 const StockReportButton = ({ onSuccess }) => {
-  const { currentProductDisplay, currentStore } = useAppContext();
+  const { currentProductDisplay, currentStore, setreportConfirmation } =
+    useAppContext();
   const [open, setOpen] = useState(false);
   const [stockStatus, setStockStatus] = useState("In Stock");
   const [imageFile, setImageFile] = useState(null);
@@ -84,7 +85,8 @@ const StockReportButton = ({ onSuccess }) => {
       setImagePreview(null);
       setNickname("");
       setOpen(false);
-      onSuccess?.(); // 👈 refresh product data
+      onSuccess?.();
+      setreportConfirmation(null);
     }
     setLoading(false);
   };

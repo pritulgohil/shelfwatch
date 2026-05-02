@@ -20,7 +20,7 @@ const ReportCards = ({ report }) => {
       <div className={styles.leftSide}>
         <div className={styles.imageContainer}>
           <Image
-            src={report.image_url || "/images/placeholder.jpg"}
+            src={report.image_url || "/images/placeholder-image.png"}
             alt="Store Image"
             width={50}
             height={50}

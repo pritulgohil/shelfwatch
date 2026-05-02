@@ -107,7 +107,7 @@ const ProductCards = ({ product }) => {
       [...reports]
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
         .find((r) => r.image_url?.trim())?.image_url ||
-      "/images/placeholder.jpg"
+      "/images/placeholder-image.png"
     );
   }, [product.reports]);
 
