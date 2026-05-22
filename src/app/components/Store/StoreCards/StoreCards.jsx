@@ -30,7 +30,7 @@ const StoreCards = ({ store }) => {
             <div className={styles.storeAddress}>{store.address}</div>
 
             <div className={styles.productsTracked}>
-              {store.products_tracked > 50 ? (
+              {store.products_tracked > 0 ? (
                 <TrendingUp size={16} className="text-green-600" />
               ) : (
                 <TrendingDown size={16} className="text-red-600" />
