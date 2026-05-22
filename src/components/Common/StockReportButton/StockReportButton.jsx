@@ -40,7 +40,6 @@ const StockReportButton = ({ onSuccess }) => {
 
     if (!file) return;
 
-    // Revoke old preview URL before replacing it
     if (imagePreview) {
       URL.revokeObjectURL(imagePreview);
     }
