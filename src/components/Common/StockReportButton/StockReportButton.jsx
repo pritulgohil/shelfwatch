@@ -5,7 +5,7 @@ import styles from "./StockReportButton.module.css";
 import { Button } from "@/components/ui/button";
 import { CirclePlus, ImagePlus } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { createReport } from "@/lib/database/reports/reports";
+import { createReport } from "@/lib/db/reports/reports";
 import { useAppContext } from "@/context/AppContext";
 
 import {

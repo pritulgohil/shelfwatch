@@ -1,6 +1,6 @@
 "use client";
 
-import StoreHeader from "@/components/Common/PageHeader/PageHeader";
+import StoreHeader from "@/components/common/PageHeader/PageHeader";
 import ProductDisplay from "@/components/Renderers/ProductDisplay/ProductDisplay";
 import { useAppContext } from "@/context/AppContext";
 import { useState, useEffect } from "react";

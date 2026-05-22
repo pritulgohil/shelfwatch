@@ -15,7 +15,7 @@
 //   }
 // }
 
-import { getProductsbyId } from "@/lib/database/products/products";
+import { getProductsbyId } from "@/lib/db/products/products";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {

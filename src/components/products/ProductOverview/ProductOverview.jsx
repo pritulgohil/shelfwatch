@@ -69,7 +69,7 @@ import React, { useMemo } from "react";
 import styles from "./ProductOverview.module.css";
 import Image from "next/image";
 import { User, Clock } from "lucide-react";
-import { getTimeAgo } from "@/lib/utils/timeAgo";
+import { getTimeAgo } from "@/lib/helpers/timeAgo";
 
 const ProductOverview = ({ currentProductDisplay }) => {
   if (!currentProductDisplay) {

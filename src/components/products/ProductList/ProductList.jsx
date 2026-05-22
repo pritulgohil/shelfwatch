@@ -81,8 +81,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import styles from "./ProductRender.module.css";
-import ProductCards from "@/components/Product/ProductCard/ProductCard";
+import styles from "./ProductList.module.css";
+import ProductCards from "@/components/products/ProductCard/ProductCard";
 import { useAppContext } from "@/context/AppContext";
 import { PackageX, LoaderCircle } from "lucide-react";
 

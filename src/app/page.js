@@ -1,8 +1,8 @@
-import Footer from "../components/Layout/Footer/Footer";
-import Header from "../components/Layout/Header/Header";
-import Hero from "../components/Layout/Hero/Hero";
-import ReportRender from "@/components/Renderers/ReportRender/ReportRender";
-import StoreSelector from "@/components/Renderers/StoreSelector/StoreSelector";
+import Footer from "../components/layout/Footer/Footer";
+import Header from "../components/layout/Header/Header";
+import Hero from "../components/layout/Hero/Hero";
+import ReportRender from "@/components/reports/ReportList/ReportList";
+import StoreSelector from "@/components/stores/StoreSelector/StoreSelector";
 import styles from "./page.module.css";
 
 export default async function Home() {

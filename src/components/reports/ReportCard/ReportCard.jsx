@@ -3,7 +3,7 @@ import styles from "./ReportCard.module.css";
 import Image from "next/image";
 import { MapPin, Clock4 } from "lucide-react";
 import { useAppContext } from "@/context/AppContext";
-import { getTimeAgo } from "@/lib/utils/timeAgo";
+import { getTimeAgo } from "@/lib/helpers/timeAgo";
 
 const ReportCards = ({ report }) => {
   const { setCurrentProduct, setCurrentStore } = useAppContext();

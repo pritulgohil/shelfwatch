@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./ProductDisplay.module.css";
-import ProductOverview from "@/components/Product/ProductOverview/ProductOverview";
-import { PriceCard } from "@/components/Product/PriceCard/PriceCard";
-import StockReportButton from "@/components/Common/StockReportButton/StockReportButton";
-import ActivityReportCard from "@/components/Product/ActivityReportCard/ActivityReportCard";
-import ProductSpecifications from "../../Product/ProductSpecifications/ProductSpecifications";
-import RecentReports from "../../Product/RecentReports/RecentReports";
-import Footer from "@/components/Layout/Footer/Footer";
+import ProductOverview from "@/components/products/ProductOverview/ProductOverview";
+import { PriceCard } from "@/components/products/PriceCard/PriceCard";
+import StockReportButton from "@/components/common/StockReportButton/StockReportButton";
+import ActivityReportCard from "@/components/reports/ActivityReportCard/ActivityReportCard";
+import ProductSpecifications from "../ProductSpecifications/ProductSpecifications";
+import RecentReports from "../../reports/RecentReports/RecentReports";
+import Footer from "@/components/layout/Footer/Footer";
 
 const ProductDisplay = ({ currentProductDisplay, onSuccess }) => {
   return (

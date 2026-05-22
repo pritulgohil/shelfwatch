@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { incrementReportConfirm } from "@/lib/database/reports/reports";
+import { incrementReportConfirm } from "@/lib/db/reports/reports";
 
 export async function POST(req, { params }) {
   try {
