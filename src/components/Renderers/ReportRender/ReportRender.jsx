@@ -4,12 +4,12 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import styles from "./ReportRender.module.css";
-import ReportCards from "@/app/components/Report/ReportCard/ReportCard";
+import ReportCards from "@/components/Report/ReportCard/ReportCard";
 import { useAppContext } from "@/context/AppContext";
 import { PackageX, LoaderCircle } from "lucide-react";
 
 const ReportRender = () => {
-  const {} = useAppContext();
+  const { } = useAppContext();
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
 

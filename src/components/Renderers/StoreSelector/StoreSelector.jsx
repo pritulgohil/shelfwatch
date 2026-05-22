@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import styles from "./StoreSelector.module.css";
-import StoreCards from "@/app/components/Store/StoreCards/StoreCards";
-import StockReportButton from "@/app/components/Common/StockReportButton/StockReportButton";
+import StoreCards from "@/components/Store/StoreCards/StoreCards";
+import StockReportButton from "@/components/Common/StockReportButton/StockReportButton";
 import { useAppContext } from "@/context/AppContext";
-import StoreSelectorSkeleton from "@/app/components/Skeletons/StoreSelectorSkeleton";
+import StoreSelectorSkeleton from "@/components/Skeletons/StoreSelectorSkeleton";
 
 const StoreSelector = () => {
   const { stores, setStores, setCurrentStore } = useAppContext();
@@ -38,15 +38,15 @@ const StoreSelector = () => {
         <div className={styles.storeCards}>
           {loading
             ? Array.from({ length: 2 }).map((_, i) => (
-                <StoreSelectorSkeleton key={i} />
-              ))
+              <StoreSelectorSkeleton key={i} />
+            ))
             : stores.map((store) => (
-                <StoreCards
-                  key={store.id}
-                  store={store}
-                  onClick={() => handleCurrentStore(store)}
-                />
-              ))}
+              <StoreCards
+                key={store.id}
+                store={store}
+                onClick={() => handleCurrentStore(store)}
+              />
+            ))}
         </div>
 
         <StockReportButton />

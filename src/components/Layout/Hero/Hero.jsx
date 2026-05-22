@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Hero.module.css";
 import { Input } from "@/components/ui/input";
 import { LucideSearch } from "lucide-react";
-import SearchBar from "@/app/components/Common/SearchBar/SearchBar";
+import SearchBar from "@/components/Common/SearchBar/SearchBar";
 
 const Hero = () => {
   return (
