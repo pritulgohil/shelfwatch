@@ -1,4 +1,4 @@
-import { getStoreById } from "@/lib/database/stores/stores";
+import { getStoreById } from "@/lib/db/stores/stores";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {

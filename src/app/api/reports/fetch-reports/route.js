@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchReports } from "@/lib/database/reports/reports";
+import { fetchReports } from "@/lib/db/reports/reports";
 
 export async function GET() {
   try {
