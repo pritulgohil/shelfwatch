@@ -4,8 +4,8 @@ import ProductOverview from "@/components/products/ProductOverview/ProductOvervi
 import { PriceCard } from "@/components/products/PriceCard/PriceCard";
 import StockReportButton from "@/components/common/StockReportButton/StockReportButton";
 import ActivityReportCard from "@/components/reports/ActivityReportCard/ActivityReportCard";
-import ProductSpecifications from "../ProductSpecifications/ProductSpecifications";
-import RecentReports from "../../reports/RecentReports/RecentReports";
+import ProductSpecifications from "@/components/products/ProductSpecifications/ProductSpecifications";
+import RecentReports from "@/components/reports/RecentReports/RecentReports";
 import Footer from "@/components/layout/Footer/Footer";
 
 const ProductDisplay = ({ currentProductDisplay, onSuccess }) => {
