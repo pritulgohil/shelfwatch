@@ -6,9 +6,6 @@ import { useStoreContext } from "@/context/StoreContext";
 
 const ProductSpecifications = ({ currentProductDisplay }) => {
   const { store, currentStore, setStore } = useStoreContext();
-  if (!currentProductDisplay) {
-    return <>Loading..</>;
-  }
 
   useEffect(() => {
     const fetchStoreById = async () => {
@@ -25,6 +22,10 @@ const ProductSpecifications = ({ currentProductDisplay }) => {
       fetchStoreById();
     }
   }, [currentStore, store]);
+
+  if (!currentProductDisplay) {
+    return <>Loading..</>;
+  }
 
   return (
     <div className={styles.mainContainer}>
