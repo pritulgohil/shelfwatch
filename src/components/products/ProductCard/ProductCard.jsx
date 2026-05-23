@@ -10,21 +10,17 @@ const ProductCards = ({ product }) => {
   const { setCurrentProduct } = useProductContext();
   const { store } = useStoreContext();
 
-  if (!product || !store) {
-    return <>Loading...</>;
-  }
-
   const latestReport = useMemo(() => {
-    const reports = product.reports || [];
+    const reports = product?.reports || [];
     if (!reports.length) return null;
 
     return [...reports].sort(
       (a, b) => new Date(b.created_at) - new Date(a.created_at),
     )[0];
-  }, [product.reports]);
+  }, [product?.reports]);
 
   const latestImage = useMemo(() => {
-    const reports = product.reports || [];
+    const reports = product?.reports || [];
 
     return (
       [...reports]
@@ -32,7 +28,11 @@ const ProductCards = ({ product }) => {
         .find((r) => r.image_url?.trim())?.image_url ||
       "/images/placeholder-image.png"
     );
-  }, [product.reports]);
+  }, [product?.reports]);
+
+  if (!product || !store) {
+    return <>Loading...</>;
+  }
 
   const status = latestReport?.product_status?.status_name || "No Reports";
   const price = latestReport?.price ?? "--";
