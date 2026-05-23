@@ -7,11 +7,11 @@ import { AccordionTrigger } from "@/components/ui/accordion";
 import { Separator } from "@/components/ui/separator";
 import styles from "./RecentReports.module.css";
 import { Image } from "lucide-react";
-import { useAppContext } from "@/context/AppContext";
+import { useProductContext } from "@/context/ProductContext";
 import { getTimeAgo } from "@/lib/helpers/timeAgo";
 
 function RecentReports() {
-  const { currentProductDisplay } = useAppContext();
+  const { currentProductDisplay } = useProductContext();
 
   return (
     <div className={styles.mainContainer}>

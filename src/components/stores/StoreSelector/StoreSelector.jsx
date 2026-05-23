@@ -4,11 +4,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./StoreSelector.module.css";
 import StoreCards from "@/components/stores/StoreCards/StoreCards";
 import StockReportButton from "@/components/common/StockReportButton/StockReportButton";
-import { useAppContext } from "@/context/AppContext";
+import { useStoreContext } from "@/context/StoreContext";
 import StoreSelectorSkeleton from "@/components/skeletons/StoreSelectorSkeleton";
 
 const StoreSelector = () => {
-  const { stores, setStores, setCurrentStore } = useAppContext();
+  const { stores, setStores, setCurrentStore } = useStoreContext();
   const [loading, setLoading] = useState(true);
 
   const handleCurrentStore = (store) => {

@@ -2,11 +2,13 @@ import React, { useMemo } from "react";
 import styles from "./ProductCard.module.css";
 import Image from "next/image";
 import { MapPin, Clock4 } from "lucide-react";
-import { useAppContext } from "@/context/AppContext";
+import { useProductContext } from "@/context/ProductContext";
+import { useStoreContext } from "@/context/StoreContext";
 import { getTimeAgo } from "@/lib/helpers/timeAgo";
 
 const ProductCards = ({ product }) => {
-  const { setCurrentProduct, store } = useAppContext();
+  const { setCurrentProduct } = useProductContext();
+  const { store } = useStoreContext();
 
   if (!product || !store) {
     return <>Loading...</>;

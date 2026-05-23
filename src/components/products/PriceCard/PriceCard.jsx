@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import styles from "./PriceCard.module.css";
 import { Button } from "@/components/ui/button";
 import { ThumbsUp } from "lucide-react";
-import { useAppContext } from "@/context/AppContext";
+import { useReportContext } from "@/context/ReportContext";
 
 export const PriceCard = ({ currentProductDisplay }) => {
   if (!currentProductDisplay) {
@@ -20,7 +20,7 @@ export const PriceCard = ({ currentProductDisplay }) => {
 
   const report = latestReport;
 
-  const { confirmedReports, setConfirmedReports } = useAppContext();
+  const { confirmedReports, setConfirmedReports } = useReportContext();
 
   const isConfirmed = confirmedReports?.has(report?.id);
 

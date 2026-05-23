@@ -5,12 +5,14 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import styles from "./ProductList.module.css";
 import ProductCards from "@/components/products/ProductCard/ProductCard";
-import { useAppContext } from "@/context/AppContext";
+import { useCategoryContext } from "@/context/CategoryContext";
+import { useStoreContext } from "@/context/StoreContext";
 import { PackageX, LoaderCircle } from "lucide-react";
 
 const ProductRender = () => {
   const { city, slug } = useParams();
-  const { selectedCategory, currentStore } = useAppContext();
+  const { selectedCategory } = useCategoryContext();
+  const { currentStore } = useStoreContext();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 

@@ -6,7 +6,9 @@ import { Button } from "@/components/ui/button";
 import { CirclePlus, ImagePlus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { createReport } from "@/lib/db/reports/reports";
-import { useAppContext } from "@/context/AppContext";
+import { useProductContext } from "@/context/ProductContext";
+import { useStoreContext } from "@/context/StoreContext";
+import { useReportContext } from "@/context/ReportContext";
 
 import {
   Dialog,
@@ -24,8 +26,9 @@ const statusMap = {
 };
 
 const StockReportButton = ({ onSuccess }) => {
-  const { currentProductDisplay, currentStore, setreportConfirmation } =
-    useAppContext();
+  const { currentProductDisplay } = useProductContext();
+  const { currentStore } = useStoreContext();
+  const { setreportConfirmation } = useReportContext();
   const [open, setOpen] = useState(false);
   const [stockStatus, setStockStatus] = useState("In Stock");
   const [imageFile, setImageFile] = useState(null);

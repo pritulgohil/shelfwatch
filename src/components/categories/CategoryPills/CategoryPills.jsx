@@ -1,10 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import styles from "./CategoryPills.module.css";
-import { useAppContext } from "@/context/AppContext";
+import { useCategoryContext } from "@/context/CategoryContext";
 
 const CategoryPills = () => {
-  const { selectedCategory, setSelectedCategory } = useAppContext();
+  const { selectedCategory, setSelectedCategory } = useCategoryContext();
   const [categoriesData, setCategoriesData] = useState([]);
 
   useEffect(() => {

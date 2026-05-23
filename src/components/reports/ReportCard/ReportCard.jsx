@@ -2,11 +2,13 @@ import React from "react";
 import styles from "./ReportCard.module.css";
 import Image from "next/image";
 import { MapPin, Clock4 } from "lucide-react";
-import { useAppContext } from "@/context/AppContext";
+import { useProductContext } from "@/context/ProductContext";
+import { useStoreContext } from "@/context/StoreContext";
 import { getTimeAgo } from "@/lib/helpers/timeAgo";
 
 const ReportCards = ({ report }) => {
-  const { setCurrentProduct, setCurrentStore } = useAppContext();
+  const { setCurrentProduct } = useProductContext();
+  const { setCurrentStore } = useStoreContext();
 
   const handleCurrentProduct = (report) => {
     setCurrentProduct(report.products.id);
