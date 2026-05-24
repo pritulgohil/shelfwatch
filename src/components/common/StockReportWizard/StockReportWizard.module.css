@@ -1,0 +1,21 @@
+.triggerButton {
+  background-color: #dd2928;
+  color: white;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
+
+.triggerButton:hover {
+  background-color: #eb5050;
+}
+
+.triggerButton:active {
+  background-color: #eb5050;
+  transform: scale(0.95);
+  box-shadow: none;
+}
+
+.dialogContent {
+  width: 450px;
+}

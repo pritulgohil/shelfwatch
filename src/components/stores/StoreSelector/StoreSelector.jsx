@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./StoreSelector.module.css";
 import StoreCards from "@/components/stores/StoreCards/StoreCards";
-import StockReportButton from "@/components/common/StockReportButton/StockReportButton";
+import StockReportWizard from "@/components/common/StockReportWizard/StockReportWizard";
 import { useStoreContext } from "@/context/StoreContext";
 import StoreSelectorSkeleton from "@/components/skeletons/StoreSelectorSkeleton";
 
@@ -49,7 +49,7 @@ const StoreSelector = () => {
             ))}
         </div>
 
-        <StockReportButton />
+        <StockReportWizard />
       </div>
     </div>
   );
