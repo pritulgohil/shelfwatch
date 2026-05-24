@@ -37,7 +37,7 @@ export default function StorePage({ params }) {
 
     fetchProduct();
   }, [currentProduct, currentStore, refreshKey]);
-  // if (loading) return <div>Loading product...</div>;
+  if (loading) return <div>Loading product...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!currentProduct) return <div>No product found</div>;
 
