@@ -11,13 +11,22 @@ import {
   DialogDescription,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useStoreContext } from "@/context/StoreContext";
+import StoreCards from "@/components/stores/StoreCards/StoreCards";
 import styles from "./StockReportWizard.module.css";
 
 const StockReportWizard = () => {
+  const { stores } = useStoreContext();
   const [open, setOpen] = useState(false);
+  const [selectedStore, setSelectedStore] = useState(null);
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedStore(null);
+  };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={(val) => { if (!val) handleClose(); else setOpen(true); }}>
       <DialogTrigger asChild>
         <Button
           variant="outline"
@@ -31,11 +40,19 @@ const StockReportWizard = () => {
 
       <DialogContent className={styles.dialogContent}>
         <DialogHeader>
-          <DialogTitle>Report Stock Update</DialogTitle>
-          <DialogDescription>
-            Select a store and product to report a stock update.
-          </DialogDescription>
+          <DialogTitle>Select a store</DialogTitle>
+          <DialogDescription>Where are you reporting from?</DialogDescription>
         </DialogHeader>
+
+        <div className={styles.storeList}>
+          {stores?.map((store) => (
+            <StoreCards
+              key={store.id}
+              store={store}
+              onSelect={setSelectedStore}
+            />
+          ))}
+        </div>
       </DialogContent>
     </Dialog>
   );
