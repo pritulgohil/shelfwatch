@@ -2,13 +2,10 @@ import React, { useEffect } from "react";
 import styles from "./ProductSpecifications.module.css";
 import { Separator } from "@/components/ui/separator";
 import { Tag, Info, Barcode, Store } from "lucide-react";
-import { useAppContext } from "@/context/AppContext";
+import { useStoreContext } from "@/context/StoreContext";
 
 const ProductSpecifications = ({ currentProductDisplay }) => {
-  const { store, currentStore, setStore } = useAppContext();
-  if (!currentProductDisplay) {
-    return <>Loading..</>;
-  }
+  const { store, currentStore, setStore } = useStoreContext();
 
   useEffect(() => {
     const fetchStoreById = async () => {
@@ -25,6 +22,10 @@ const ProductSpecifications = ({ currentProductDisplay }) => {
       fetchStoreById();
     }
   }, [currentStore, store]);
+
+  if (!currentProductDisplay) {
+    return <>Loading..</>;
+  }
 
   return (
     <div className={styles.mainContainer}>

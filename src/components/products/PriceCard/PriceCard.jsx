@@ -2,25 +2,21 @@ import React, { useMemo, useState, useEffect } from "react";
 import styles from "./PriceCard.module.css";
 import { Button } from "@/components/ui/button";
 import { ThumbsUp } from "lucide-react";
-import { useAppContext } from "@/context/AppContext";
+import { useReportContext } from "@/context/ReportContext";
 
 export const PriceCard = ({ currentProductDisplay }) => {
-  if (!currentProductDisplay) {
-    return <div>Loading...</div>;
-  }
+  const { confirmedReports, setConfirmedReports } = useReportContext();
 
   const latestReport = useMemo(() => {
-    const reports = currentProductDisplay.reports || [];
+    const reports = currentProductDisplay?.reports || [];
     if (!reports.length) return null;
 
     return [...reports].sort(
       (a, b) => new Date(b.created_at) - new Date(a.created_at),
     )[0];
-  }, [currentProductDisplay.reports]);
+  }, [currentProductDisplay?.reports]);
 
   const report = latestReport;
-
-  const { confirmedReports, setConfirmedReports } = useAppContext();
 
   const isConfirmed = confirmedReports?.has(report?.id);
 
@@ -29,6 +25,10 @@ export const PriceCard = ({ currentProductDisplay }) => {
   useEffect(() => {
     setLiveCount(report?.confirmation_counter || 0);
   }, [report?.id, report?.confirmation_counter]);
+
+  if (!currentProductDisplay) {
+    return <div>Loading...</div>;
+  }
 
   const handleReportConfirmation = async () => {
     if (!report || isConfirmed) return;

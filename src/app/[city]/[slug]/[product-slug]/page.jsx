@@ -2,16 +2,17 @@
 
 import StoreHeader from "@/components/common/PageHeader/PageHeader";
 import ProductDisplay from "@/components/products/ProductDisplay/ProductDisplay";
-import { useAppContext } from "@/context/AppContext";
+import { useProductContext } from "@/context/ProductContext";
+import { useStoreContext } from "@/context/StoreContext";
 import { useState, useEffect } from "react";
 
 export default function StorePage({ params }) {
   const {
     currentProduct,
-    currentStore,
     currentProductDisplay,
     setCurrentProductDisplay,
-  } = useAppContext();
+  } = useProductContext();
+  const { currentStore } = useStoreContext();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [refreshKey, setRefreshKey] = useState(0);

@@ -4,10 +4,10 @@ import React from "react";
 import { MapPin, ChevronRight, TrendingUp, TrendingDown } from "lucide-react";
 import styles from "./StoreCards.module.css";
 import Link from "next/link";
-import { useAppContext } from "@/context/AppContext";
+import { useStoreContext } from "@/context/StoreContext";
 
 const StoreCards = ({ store }) => {
-  const { setCurrentStore } = useAppContext();
+  const { setCurrentStore } = useStoreContext();
 
   const handleCurrentStore = () => {
     setCurrentStore(store.id);

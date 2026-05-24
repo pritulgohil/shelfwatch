@@ -4,10 +4,10 @@ import styles from "./PageHeader.module.css";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, MapPin } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useAppContext } from "@/context/AppContext";
+import { useStoreContext } from "@/context/StoreContext";
 
 const StoreHeader = () => {
-  const { currentStore, store, setStore } = useAppContext();
+  const { currentStore, store, setStore } = useStoreContext();
   useEffect(() => {
     const fetchStoreById = async () => {
       try {

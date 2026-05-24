@@ -7,10 +7,10 @@ import SearchBar from "@/components/common/SearchBar/SearchBar";
 import StockPills from "@/components/categories/StockPills/StockPills";
 import StoreHeader from "@/components/common/PageHeader/PageHeader";
 import styles from "./page.module.css";
-import { useAppContext } from "@/context/AppContext";
+import { useStoreContext } from "@/context/StoreContext";
 
 export default function StorePage() {
-  const { currentStore } = useAppContext();
+  const { currentStore } = useStoreContext();
 
   if (!currentStore) {
     return <div>Loading store...</div>;
