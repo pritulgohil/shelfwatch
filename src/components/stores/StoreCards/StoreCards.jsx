@@ -43,7 +43,7 @@ const StoreCards = ({ store, onSelect }) => {
 
   if (onSelect) {
     return (
-      <button className="w-full text-left" onClick={() => onSelect(store)}>
+      <button className="w-full text-left" onClick={() => onSelect(store.id)}>
         {cardContent}
       </button>
     );

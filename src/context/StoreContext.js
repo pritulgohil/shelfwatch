@@ -6,7 +6,7 @@ export const StoreContext = createContext(null);
 
 export const StoreProvider = ({ children }) => {
   const [stores, setStores] = useState([]);
-  const [currentStore, setCurrentStore] = useState([]);
+  const [currentStore, setCurrentStore] = useState(null);
   const [store, setStore] = useState(null);
 
   const value = {

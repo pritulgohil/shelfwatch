@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CirclePlus } from "lucide-react";
+import { ArrowLeft, CirclePlus, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -16,13 +16,21 @@ import StoreCards from "@/components/stores/StoreCards/StoreCards";
 import styles from "./StockReportWizard.module.css";
 
 const StockReportWizard = () => {
-  const { stores } = useStoreContext();
+  const { stores, currentStore, setCurrentStore } = useStoreContext();
   const [open, setOpen] = useState(false);
-  const [selectedStore, setSelectedStore] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const selectedStore = stores?.find((s) => s.id === currentStore);
 
   const handleClose = () => {
     setOpen(false);
-    setSelectedStore(null);
+    setCurrentStore(null);
+    setSearchQuery("");
+  };
+
+  const handleBack = () => {
+    setCurrentStore(null);
+    setSearchQuery("");
   };
 
   return (
@@ -37,22 +45,63 @@ const StockReportWizard = () => {
           Report Stock Update
         </Button>
       </DialogTrigger>
-
       <DialogContent className={styles.dialogContent}>
-        <DialogHeader>
-          <DialogTitle>Select a store</DialogTitle>
-          <DialogDescription>Where are you reporting from?</DialogDescription>
-        </DialogHeader>
+        {currentStore ? (
+          <>
+            <DialogHeader>
+              <button className={styles.backButton} onClick={handleBack}>
+                <ArrowLeft size={16} />
+                {selectedStore?.name}
+              </button>
+            </DialogHeader>
+            <div className={styles.searchBarContainer}>
+              <div className={styles.searchInputWrapper}>
+                <Search size={18} className={styles.searchIcon} />
+                <input
+                  type="text"
+                  placeholder="Search products"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className={styles.searchInput}
+                />
+              </div>
+            </div>
+            <div className={styles.productList}>
+              {Array.from({ length: 10 }).map((_, index) => (
+                <div key={index} className={styles.productCard}>
+                  <div className={styles.productImage}>
+                    <img
+                      src="/images/package.png"
+                      alt="Product"
+                      className={styles.image}
+                    />
+                  </div>
+                  <div className={styles.productInfo}>
+                    <h3 className={styles.productName}>Kirkland Water 40-pack</h3>
+                    <p className={styles.productCategory}>Beverages</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
+            <DialogHeader>
+              <DialogTitle>Select a store</DialogTitle>
+              <DialogDescription>Where are you reporting from?</DialogDescription>
+            </DialogHeader>
 
-        <div className={styles.storeList}>
-          {stores?.map((store) => (
-            <StoreCards
-              key={store.id}
-              store={store}
-              onSelect={setSelectedStore}
-            />
-          ))}
-        </div>
+            <div className={styles.storeList}>
+              {stores?.map((store) => (
+                <StoreCards
+                  key={store.id}
+                  store={store}
+                  onSelect={setCurrentStore}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );
