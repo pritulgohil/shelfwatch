@@ -5,7 +5,6 @@ import styles from "./StockReportButton.module.css";
 import { Button } from "@/components/ui/button";
 import { CirclePlus, ImagePlus } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { createReport } from "@/lib/db/reports/reports";
 import { useProductContext } from "@/context/ProductContext";
 import { useStoreContext } from "@/context/StoreContext";
 import { useReportContext } from "@/context/ReportContext";
@@ -28,7 +27,7 @@ const statusMap = {
 const StockReportButton = ({ onSuccess }) => {
   const { currentProductDisplay } = useProductContext();
   const { currentStore } = useStoreContext();
-  const { setreportConfirmation } = useReportContext();
+
   const [open, setOpen] = useState(false);
   const [stockStatus, setStockStatus] = useState("In Stock");
   const [imageFile, setImageFile] = useState(null);
@@ -40,7 +39,6 @@ const StockReportButton = ({ onSuccess }) => {
 
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
-
     if (!file) return;
 
     if (imagePreview) {
@@ -48,7 +46,6 @@ const StockReportButton = ({ onSuccess }) => {
     }
 
     setImageFile(file);
-
     const previewUrl = URL.createObjectURL(file);
     setImagePreview(previewUrl);
   };
@@ -62,23 +59,52 @@ const StockReportButton = ({ onSuccess }) => {
   }, [imagePreview]);
 
   const handleSubmitReport = async () => {
-    if (!price) {
-      setPriceError(true);
-      return;
+  if (!price) {
+    setPriceError(true);
+    return;
+  }
+
+  setPriceError(false);
+  setLoading(true);
+
+  try {
+    let imageUrl = null;
+
+    // 1. upload image first (if exists)
+    if (imageFile) {
+      const formData = new FormData();
+      formData.append("imageFile", imageFile);
+
+      const uploadRes = await fetch("/api/reports/upload-image", {
+        method: "POST",
+        body: formData,
+      });
+
+      const uploadData = await uploadRes.json();
+
+      if (!uploadRes.ok) throw new Error("Upload failed");
+
+      imageUrl = uploadData.imageUrl;
     }
 
-    setPriceError(false);
-    setLoading(true);
-
-    const result = await createReport({
-      productId: currentProductDisplay?.id,
-      storeId: currentStore,
-      categoryId: currentProductDisplay?.category_id,
-      statusId: statusMap[stockStatus],
-      price,
-      imageFile,
-      nickname: nickname || "shopper",
+    // 2. send JSON to create report
+    const res = await fetch("/api/reports/create-report", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        productId: currentProductDisplay?.id,
+        storeId: currentStore,
+        categoryId: currentProductDisplay?.category_id,
+        statusId: statusMap[stockStatus],
+        price,
+        imageUrl,
+        nickname: nickname || "shopper",
+      }),
     });
+
+    const result = await res.json();
 
     if (result.success) {
       setPrice("");
@@ -87,11 +113,17 @@ const StockReportButton = ({ onSuccess }) => {
       setImagePreview(null);
       setNickname("");
       setOpen(false);
+
       onSuccess?.();
-      setreportConfirmation(null);
+    } else {
+      console.error(result.error);
     }
-    setLoading(false);
-  };
+  } catch (error) {
+    console.error("Submit failed:", error);
+  }
+
+  setLoading(false);
+};
 
   return (
     <div className={styles.reportStockButtonContainer}>
@@ -110,7 +142,6 @@ const StockReportButton = ({ onSuccess }) => {
         <DialogContent className={styles.dialogContent}>
           <DialogHeader>
             <DialogTitle>Report Stock Update</DialogTitle>
-
             <DialogDescription>
               Enter the stock changes for this item.
             </DialogDescription>
@@ -123,30 +154,29 @@ const StockReportButton = ({ onSuccess }) => {
 
               <div className={styles.formField}>
                 <div
-                  className={`${styles.stockPill}
-                    ${stockStatus === "In Stock" ? styles.inStockActive : ""}`}
+                  className={`${styles.stockPill} ${
+                    stockStatus === "In Stock" ? styles.inStockActive : ""
+                  }`}
                   onClick={() => setStockStatus("In Stock")}
                 >
                   In Stock
                 </div>
 
                 <div
-                  className={`${styles.stockPill}
-                    ${
-                      stockStatus === "Low Stock" ? styles.lowStockActive : ""
-                    }`}
+                  className={`${styles.stockPill} ${
+                    stockStatus === "Low Stock" ? styles.lowStockActive : ""
+                  }`}
                   onClick={() => setStockStatus("Low Stock")}
                 >
                   Low Stock
                 </div>
 
                 <div
-                  className={`${styles.stockPill}
-                    ${
-                      stockStatus === "Out of Stock"
-                        ? styles.outOfStockActive
-                        : ""
-                    }`}
+                  className={`${styles.stockPill} ${
+                    stockStatus === "Out of Stock"
+                      ? styles.outOfStockActive
+                      : ""
+                  }`}
                   onClick={() => setStockStatus("Out of Stock")}
                 >
                   Out of Stock
@@ -178,7 +208,7 @@ const StockReportButton = ({ onSuccess }) => {
               </div>
             </div>
 
-            {/* Image Upload + Preview */}
+            {/* Image Upload */}
             <div className={styles.inputContainer}>
               <div className={styles.formFieldTitle}>
                 Upload Image (optional)
@@ -207,15 +237,14 @@ const StockReportButton = ({ onSuccess }) => {
               </label>
             </div>
 
+            {/* Nickname */}
             <div className={styles.inputContainer}>
               <div className={styles.formFieldTitle}>Nickname (optional)</div>
 
               <Input
                 type="text"
                 value={nickname}
-                onChange={(e) => {
-                  setNickname(e.target.value);
-                }}
+                onChange={(e) => setNickname(e.target.value)}
                 placeholder="e.g. StockSpotter119"
                 className="h-12"
               />

@@ -5,13 +5,10 @@ import { createContext, useState, useContext } from "react";
 export const ReportContext = createContext(null);
 
 export const ReportProvider = ({ children }) => {
-  const [reportConfirmation, setreportConfirmation] = useState(null);
   const [reportConfirmationPrice, setreportConfirmationPrice] = useState(null);
   const [confirmedReports, setConfirmedReports] = useState(new Set());
 
   const value = {
-    reportConfirmation,
-    setreportConfirmation,
     reportConfirmationPrice,
     setreportConfirmationPrice,
     confirmedReports,
