@@ -18,15 +18,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const statusMap = {
-  "In Stock": "c100aa57-0537-4691-8fee-4707ec1823f4",
-  "Low Stock": "e94276e3-f6a2-43c1-9802-ba37ef43c20f",
-  "Out of Stock": "96be1b07-e6b0-45cc-b683-fc20d74113bb",
-};
-
 const StockReportButton = ({ onSuccess }) => {
   const { currentProductDisplay } = useProductContext();
   const { currentStore } = useStoreContext();
+  const { submitReport } = useReportContext();
 
   const [open, setOpen] = useState(false);
   const [stockStatus, setStockStatus] = useState("In Stock");
@@ -59,71 +54,43 @@ const StockReportButton = ({ onSuccess }) => {
   }, [imagePreview]);
 
   const handleSubmitReport = async () => {
-  if (!price) {
-    setPriceError(true);
-    return;
-  }
-
-  setPriceError(false);
-  setLoading(true);
-
-  try {
-    let imageUrl = null;
-
-    // 1. upload image first (if exists)
-    if (imageFile) {
-      const formData = new FormData();
-      formData.append("imageFile", imageFile);
-
-      const uploadRes = await fetch("/api/reports/upload-image", {
-        method: "POST",
-        body: formData,
-      });
-
-      const uploadData = await uploadRes.json();
-
-      if (!uploadRes.ok) throw new Error("Upload failed");
-
-      imageUrl = uploadData.imageUrl;
+    if (!price) {
+      setPriceError(true);
+      return;
     }
 
-    // 2. send JSON to create report
-    const res = await fetch("/api/reports/create-report", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    setPriceError(false);
+    setLoading(true);
+
+    try {
+      const result = await submitReport({
         productId: currentProductDisplay?.id,
         storeId: currentStore,
         categoryId: currentProductDisplay?.category_id,
-        statusId: statusMap[stockStatus],
+        stockStatus,
         price,
-        imageUrl,
-        nickname: nickname || "shopper",
-      }),
-    });
+        imageFile,
+        nickname,
+      });
 
-    const result = await res.json();
+      if (result.success) {
+        setPrice("");
+        setStockStatus("In Stock");
+        setImageFile(null);
+        setImagePreview(null);
+        setNickname("");
+        setOpen(false);
 
-    if (result.success) {
-      setPrice("");
-      setStockStatus("In Stock");
-      setImageFile(null);
-      setImagePreview(null);
-      setNickname("");
-      setOpen(false);
-
-      onSuccess?.();
-    } else {
-      console.error(result.error);
+        onSuccess?.();
+      } else {
+        console.error(result.error);
+      }
+    } catch (error) {
+      console.error("Submit failed:", error);
     }
-  } catch (error) {
-    console.error("Submit failed:", error);
-  }
 
-  setLoading(false);
-};
+    setLoading(false);
+  };
 
   return (
     <div className={styles.reportStockButtonContainer}>

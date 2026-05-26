@@ -192,6 +192,8 @@ export async function getAllProducts(storeId) {
   const { data, error } = await supabase
     .from("products")
     .select(`
+      id,
+      category_id,
       brand,
       name,
       categories (
@@ -214,6 +216,8 @@ export async function getAllProducts(storeId) {
 
   // pick latest report per product
   return data.map((product) => ({
+    id: product.id,
+    category_id: product.category_id,
     brand: product.brand,
     name: product.name,
     category_name: product.categories?.name,
