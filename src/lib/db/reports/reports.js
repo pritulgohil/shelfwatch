@@ -72,16 +72,10 @@ export async function createReport({
   statusId,
   categoryId,
   price,
-  imageFile,
+  imageUrl, // ✅ ONLY URL
   nickname,
 }) {
   try {
-    let imageUrl = null;
-
-    if (imageFile) {
-      imageUrl = await uploadReportImage(imageFile);
-    }
-
     const { data, error } = await supabase
       .from("reports")
       .insert([
@@ -89,7 +83,7 @@ export async function createReport({
           product_id: productId,
           store_id: storeId,
           price: price ? Number(price) : null,
-          image_url: imageUrl,
+          image_url: imageUrl, // ✅ DIRECT SAVE
           status_id: statusId,
           category_id: categoryId,
           reported_by: nickname || "shopper",
@@ -103,7 +97,6 @@ export async function createReport({
     return { success: true, data };
   } catch (error) {
     console.error("Create report failed:", error);
-
     return { success: false, error };
   }
 }

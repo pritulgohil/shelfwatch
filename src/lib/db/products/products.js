@@ -187,3 +187,40 @@ export async function getProductDisplay(productId, storeId) {
 
   return data;
 }
+
+export async function getAllProducts(storeId) {
+  const { data, error } = await supabase
+    .from("products")
+    .select(`
+      id,
+      category_id,
+      brand,
+      name,
+      categories (
+        name
+      ),
+      reports (
+        image_url,
+        created_at,
+        store_id
+      )
+    `)
+    .eq("reports.store_id", storeId)
+    .order("brand", { ascending: true })
+    .order("created_at", { foreignTable: "reports", ascending: false });
+
+  if (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+
+  // pick latest report per product
+  return data.map((product) => ({
+    id: product.id,
+    category_id: product.category_id,
+    brand: product.brand,
+    name: product.name,
+    category_name: product.categories?.name,
+    latest_image: product.reports?.[0]?.image_url || null,
+  }));
+}

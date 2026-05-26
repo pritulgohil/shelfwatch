@@ -5,7 +5,6 @@ import styles from "./StockReportButton.module.css";
 import { Button } from "@/components/ui/button";
 import { CirclePlus, ImagePlus } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { createReport } from "@/lib/db/reports/reports";
 import { useProductContext } from "@/context/ProductContext";
 import { useStoreContext } from "@/context/StoreContext";
 import { useReportContext } from "@/context/ReportContext";
@@ -19,16 +18,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const statusMap = {
-  "In Stock": "c100aa57-0537-4691-8fee-4707ec1823f4",
-  "Low Stock": "e94276e3-f6a2-43c1-9802-ba37ef43c20f",
-  "Out of Stock": "96be1b07-e6b0-45cc-b683-fc20d74113bb",
-};
-
 const StockReportButton = ({ onSuccess }) => {
   const { currentProductDisplay } = useProductContext();
   const { currentStore } = useStoreContext();
-  const { setreportConfirmation } = useReportContext();
+  const { submitReport } = useReportContext();
+
   const [open, setOpen] = useState(false);
   const [stockStatus, setStockStatus] = useState("In Stock");
   const [imageFile, setImageFile] = useState(null);
@@ -40,7 +34,6 @@ const StockReportButton = ({ onSuccess }) => {
 
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
-
     if (!file) return;
 
     if (imagePreview) {
@@ -48,7 +41,6 @@ const StockReportButton = ({ onSuccess }) => {
     }
 
     setImageFile(file);
-
     const previewUrl = URL.createObjectURL(file);
     setImagePreview(previewUrl);
   };
@@ -70,26 +62,33 @@ const StockReportButton = ({ onSuccess }) => {
     setPriceError(false);
     setLoading(true);
 
-    const result = await createReport({
-      productId: currentProductDisplay?.id,
-      storeId: currentStore,
-      categoryId: currentProductDisplay?.category_id,
-      statusId: statusMap[stockStatus],
-      price,
-      imageFile,
-      nickname: nickname || "shopper",
-    });
+    try {
+      const result = await submitReport({
+        productId: currentProductDisplay?.id,
+        storeId: currentStore,
+        categoryId: currentProductDisplay?.category_id,
+        stockStatus,
+        price,
+        imageFile,
+        nickname,
+      });
 
-    if (result.success) {
-      setPrice("");
-      setStockStatus("In Stock");
-      setImageFile(null);
-      setImagePreview(null);
-      setNickname("");
-      setOpen(false);
-      onSuccess?.();
-      setreportConfirmation(null);
+      if (result.success) {
+        setPrice("");
+        setStockStatus("In Stock");
+        setImageFile(null);
+        setImagePreview(null);
+        setNickname("");
+        setOpen(false);
+
+        onSuccess?.();
+      } else {
+        console.error(result.error);
+      }
+    } catch (error) {
+      console.error("Submit failed:", error);
     }
+
     setLoading(false);
   };
 
@@ -110,7 +109,6 @@ const StockReportButton = ({ onSuccess }) => {
         <DialogContent className={styles.dialogContent}>
           <DialogHeader>
             <DialogTitle>Report Stock Update</DialogTitle>
-
             <DialogDescription>
               Enter the stock changes for this item.
             </DialogDescription>
@@ -123,30 +121,29 @@ const StockReportButton = ({ onSuccess }) => {
 
               <div className={styles.formField}>
                 <div
-                  className={`${styles.stockPill}
-                    ${stockStatus === "In Stock" ? styles.inStockActive : ""}`}
+                  className={`${styles.stockPill} ${
+                    stockStatus === "In Stock" ? styles.inStockActive : ""
+                  }`}
                   onClick={() => setStockStatus("In Stock")}
                 >
                   In Stock
                 </div>
 
                 <div
-                  className={`${styles.stockPill}
-                    ${
-                      stockStatus === "Low Stock" ? styles.lowStockActive : ""
-                    }`}
+                  className={`${styles.stockPill} ${
+                    stockStatus === "Low Stock" ? styles.lowStockActive : ""
+                  }`}
                   onClick={() => setStockStatus("Low Stock")}
                 >
                   Low Stock
                 </div>
 
                 <div
-                  className={`${styles.stockPill}
-                    ${
-                      stockStatus === "Out of Stock"
-                        ? styles.outOfStockActive
-                        : ""
-                    }`}
+                  className={`${styles.stockPill} ${
+                    stockStatus === "Out of Stock"
+                      ? styles.outOfStockActive
+                      : ""
+                  }`}
                   onClick={() => setStockStatus("Out of Stock")}
                 >
                   Out of Stock
@@ -178,7 +175,7 @@ const StockReportButton = ({ onSuccess }) => {
               </div>
             </div>
 
-            {/* Image Upload + Preview */}
+            {/* Image Upload */}
             <div className={styles.inputContainer}>
               <div className={styles.formFieldTitle}>
                 Upload Image (optional)
@@ -207,15 +204,14 @@ const StockReportButton = ({ onSuccess }) => {
               </label>
             </div>
 
+            {/* Nickname */}
             <div className={styles.inputContainer}>
               <div className={styles.formFieldTitle}>Nickname (optional)</div>
 
               <Input
                 type="text"
                 value={nickname}
-                onChange={(e) => {
-                  setNickname(e.target.value);
-                }}
+                onChange={(e) => setNickname(e.target.value)}
                 placeholder="e.g. StockSpotter119"
                 className="h-12"
               />

@@ -6,10 +6,12 @@ import { useParams } from "next/navigation";
 import styles from "./ReportList.module.css";
 import ReportCards from "@/components/reports/ReportCard/ReportCard";
 import { PackageX, LoaderCircle } from "lucide-react";
+import { useReportContext } from "@/context/ReportContext";
 
 const ReportRender = () => {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { reportsRefreshTrigger } = useReportContext();
 
   useEffect(() => {
     const fetchReports = async () => {
@@ -31,7 +33,7 @@ const ReportRender = () => {
     };
 
     fetchReports();
-  }, []);
+  }, [reportsRefreshTrigger]);
 
   return (
     <div className={styles.mainContainer}>
