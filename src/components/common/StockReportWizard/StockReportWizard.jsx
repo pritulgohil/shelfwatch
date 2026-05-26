@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowLeft, CirclePlus, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,7 +19,7 @@ const StockReportWizard = () => {
   const { stores, currentStore, setCurrentStore } = useStoreContext();
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-
+  const [products, setProducts] = useState([]);
   const selectedStore = stores?.find((s) => s.id === currentStore);
 
   const handleClose = () => {
@@ -32,6 +32,30 @@ const StockReportWizard = () => {
     setCurrentStore(null);
     setSearchQuery("");
   };
+
+  const fetchAllProducts = async () => {
+    const res = await fetch(`/api/products/fetch-products/search/${currentStore}`);
+    const data = await res.json();
+    setProducts(data);
+  };
+
+  useEffect(() => {
+  if (currentStore) {
+    fetchAllProducts();
+  }
+}, [currentStore]);
+
+  console.log(products)
+
+  const filteredProducts = products?.filter((product) => {
+  const query = searchQuery.toLowerCase();
+
+  return (
+    product?.brand?.toLowerCase().includes(query) ||
+    product?.name?.toLowerCase().includes(query) ||
+    product?.categories?.name?.toLowerCase().includes(query)
+  );
+});
 
   return (
     <Dialog open={open} onOpenChange={(val) => { if (!val) handleClose(); else setOpen(true); }}>
@@ -54,6 +78,7 @@ const StockReportWizard = () => {
                 {selectedStore?.name}
               </button>
             </DialogHeader>
+            <div className={styles.dialoagHeader}><h2>Find a product</h2><p>Select the product you want to report</p></div>
             <div className={styles.searchBarContainer}>
               <div className={styles.searchInputWrapper}>
                 <Search size={18} className={styles.searchIcon} />
@@ -67,18 +92,18 @@ const StockReportWizard = () => {
               </div>
             </div>
             <div className={styles.productList}>
-              {Array.from({ length: 10 }).map((_, index) => (
+                {filteredProducts?.map((product, index) => (
                 <div key={index} className={styles.productCard}>
                   <div className={styles.productImage}>
                     <img
-                      src="/images/package.png"
+                      src={product?.latest_image || "/images/package.png"}
                       alt="Product"
-                      className={styles.image}
+                      className={product?.latest_image ? styles.productActualImage : styles.image}
                     />
                   </div>
                   <div className={styles.productInfo}>
-                    <h3 className={styles.productName}>Kirkland Water 40-pack</h3>
-                    <p className={styles.productCategory}>Beverages</p>
+                    <h3 className={styles.productName}>{product?.brand} {product?.name}</h3>
+                    <p className={styles.productCategory}>{product.categories?.name}</p>
                   </div>
                 </div>
               ))}
@@ -97,6 +122,7 @@ const StockReportWizard = () => {
                   key={store.id}
                   store={store}
                   onSelect={setCurrentStore}
+                  onClick={() => fetchAllProducts()}
                 />
               ))}
             </div>

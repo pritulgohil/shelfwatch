@@ -126,6 +126,13 @@
   border-radius: 8px;
 }
 
+.productActualImage{
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
 .image {
   width: 20px;
   height: 20px;
@@ -140,4 +147,16 @@
   font-size: 12px;
   font-weight: 400;
   color: #999;
+}
+
+.dialoagHeader h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.dialoagHeader p {
+  font-size: 0.875rem;
+  color: #666;
+  font-weight: 400;
 }
