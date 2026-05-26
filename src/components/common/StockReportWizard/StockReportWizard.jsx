@@ -143,6 +143,7 @@ const StockReportWizard = () => {
           variant="outline"
           className={`${styles.triggerButton} w-full p-6 cursor-pointer shadow-none`}
           size="sm"
+          onClick={() => setCurrentStore(null)}
         >
           <CirclePlus size={16} />
           Report Stock Update

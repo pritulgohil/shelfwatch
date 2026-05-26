@@ -9,7 +9,7 @@ import { useCategoryContext } from "@/context/CategoryContext";
 import { useStoreContext } from "@/context/StoreContext";
 import { PackageX, LoaderCircle } from "lucide-react";
 
-const ProductRender = () => {
+const ProductRender = ({ searchQuery }) => {
   const { city, slug } = useParams();
   const { selectedCategory } = useCategoryContext();
   const { currentStore } = useStoreContext();
@@ -44,6 +44,16 @@ const ProductRender = () => {
     if (currentStore) fetchProducts();
   }, [selectedCategory, currentStore]);
 
+  const filteredProducts = products.filter((product) => {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase();
+    return (
+      product.name?.toLowerCase().includes(query) ||
+      product.brand?.toLowerCase().includes(query) ||
+      product.description?.toLowerCase().includes(query)
+    );
+  });
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.contentContainer}>
@@ -52,14 +62,14 @@ const ProductRender = () => {
             <LoaderCircle className="animate-spin" />
             <p>Loading products...</p>
           </div>
-        ) : products.length === 0 ? (
+        ) : filteredProducts.length === 0 ? (
           <div className={styles.centerMessage}>
             <PackageX />
-            <p>No products found for this category.</p>
+            <p>No products found.</p>
           </div>
         ) : (
           <div className={styles.productCardsContainer}>
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <Link
                 key={product.id}
                 href={`/${city}/${slug}/${product.slug}`}

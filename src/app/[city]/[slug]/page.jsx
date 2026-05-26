@@ -1,16 +1,17 @@
 "use client";
 
+import React, { useState } from "react";
 import Footer from "@/components/layout/Footer/Footer";
 import CategoryPills from "@/components/categories/CategoryPills/CategoryPills";
 import ProductRender from "@/components/products/ProductList/ProductList";
-import SearchBar from "@/components/common/SearchBar/SearchBar";
-import StockPills from "@/components/categories/StockPills/StockPills";
+import StoreSearchBar from "@/components/common/StoreSearchBar/StoreSearchBar";
 import StoreHeader from "@/components/common/PageHeader/PageHeader";
 import styles from "./page.module.css";
 import { useStoreContext } from "@/context/StoreContext";
 
 export default function StorePage() {
   const { currentStore } = useStoreContext();
+  const [searchQuery, setSearchQuery] = useState("");
 
   if (!currentStore) {
     return <div>Loading store...</div>;
@@ -19,11 +20,10 @@ export default function StorePage() {
   return (
     <div className={styles.mainContainer}>
       <StoreHeader />
-      <SearchBar />
+      <StoreSearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <CategoryPills />
-      <StockPills />
       <div className={styles.contentContainer}>
-        <ProductRender />
+        <ProductRender searchQuery={searchQuery} />
       </div>
       <Footer />
     </div>
